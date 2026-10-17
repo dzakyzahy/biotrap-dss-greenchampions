@@ -14,9 +14,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title:
-    "BioTrap-SIM™ v2.6 DSS | Intelligent Circular Bioenergy & H₂S Desulfurization — GREEN CHAMPIONS 2026",
+    "BioTrap-SIM™ v2.6 DSS | Intelligent Circular Bioenergy & H₂S Desulfurization - GREEN CHAMPIONS 2026",
   description:
-    "Decision Support System (DSS) untuk Dual-Stage Biochar Engineering (Katalisis DIET Biodigester POME), Modular Lead-Lag H₂S Scrubber Skid, dan Valorisasi Pupuk Sirkular BioSulfur™ — Tim Think3rs ITB | Green Champions 2026 (Green Democracy Institute)",
+    "Decision Support System (DSS) untuk Dual-Stage Biochar Engineering (Katalisis DIET Biodigester POME), Modular Lead-Lag H₂S Scrubber Skid, dan Valorisasi Pupuk Sirkular BioSulfur™ - Tim Think3rs ITB | Green Champions 2026 (Green Democracy Institute)",
 };
 
 export default function RootLayout({
@@ -25,9 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className="dark" suppressHydrationWarning>
+    <html lang="id" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased selection:bg-emerald-500 selection:text-white`}
+        className={`${inter.variable} ${jetbrainsMono.variable} bg-gray-50 text-gray-900 antialiased selection:bg-emerald-600 selection:text-white`}
         suppressHydrationWarning
       >
         {children}

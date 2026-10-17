@@ -13,7 +13,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { Download, FlaskConical, Play } from "lucide-react";
+import { Download } from "lucide-react";
 
 export function ResearchTab() {
   const [indepVar, setIndepVar] = useState<"biocharDose" | "tbsCapacity" | "h2sInlet">("biocharDose");
@@ -133,51 +133,48 @@ export function ResearchTab() {
 
   return (
     <div className="space-y-6">
-      <div className="glass-card rounded-2xl p-6">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
-          <div className="flex items-center gap-2">
-            <FlaskConical className="h-5 w-5 text-emerald-400" />
-            <div>
-              <h2 className="text-base font-bold text-white">
-                Mode Penelitian &amp; Eksperimen Parametrik RSM-CCD
-              </h2>
-              <p className="text-xs text-slate-400">
-                Simulasi kolektif multi-titik untuk validasi sensitivitas kinetika metana (TFM), desulfurisasi H₂S, dan kelayakan ekonomi
-              </p>
-            </div>
+      <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-3">
+          <div>
+            <h2 className="text-base font-bold text-gray-900">
+              Mode Penelitian &amp; Eksperimen Parametrik RSM-CCD
+            </h2>
+            <p className="text-xs text-gray-500">
+              Simulasi kolektif multi-titik untuk validasi sensitivitas kinetika metana (TFM), desulfurisasi H₂S, dan kelayakan ekonomi
+            </p>
           </div>
-          <span className="rounded-lg bg-emerald-950 border border-emerald-700/50 px-3 py-1 font-mono text-xs text-emerald-400">
+          <span className="rounded-lg bg-emerald-50 border border-emerald-200 px-3 py-1 font-mono text-xs font-semibold text-emerald-800">
             Yan et al. (2025) • R² = 0,9850
           </span>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* Left: Variable Sweep Config */}
-          <div className="space-y-4 border-b border-slate-800 pb-4 md:border-b-0 md:border-r md:pb-0 md:pr-6">
+          <div className="space-y-4 border-b border-gray-100 pb-4 md:border-b-0 md:border-r md:pb-0 md:pr-6">
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-300">
+              <label className="mb-1 block text-xs font-semibold text-gray-700">
                 Variabel Independen (Sumbu X)
               </label>
               <select
                 value={indepVar}
                 onChange={(e) => handleVarChange(e.target.value as any)}
-                className="w-full rounded-xl border border-slate-700 bg-slate-900 p-2.5 text-xs text-white"
+                className="w-full rounded-xl border border-gray-300 bg-white p-2.5 text-xs text-gray-900"
               >
                 <option value="biocharDose">
-                  Dosis Mikro-Biochar TKKS / X₁ (0,0 – 4,0 g/L)
+                  Dosis Mikro-Biochar TKKS / X₁ (0,0 - 4,0 g/L)
                 </option>
                 <option value="tbsCapacity">
-                  Kapasitas Olah PKS / TBS (30 – 60 Ton/jam)
+                  Kapasitas Olah PKS / TBS (30 - 60 Ton/jam)
                 </option>
                 <option value="h2sInlet">
-                  Beban H₂S Mentah Inlet Skid (1.500 – 4.000 ppm)
+                  Beban H₂S Mentah Inlet Skid (1.500 - 4.000 ppm)
                 </option>
               </select>
             </div>
 
             <div className="grid grid-cols-3 gap-3">
               <div>
-                <label className="mb-1 block text-[11px] text-slate-400">
+                <label className="mb-1 block text-[11px] text-gray-500">
                   Nilai Awal
                 </label>
                 <input
@@ -185,11 +182,11 @@ export function ResearchTab() {
                   step="any"
                   value={startVal}
                   onChange={(e) => setStartVal(Number(e.target.value))}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900 p-2 font-mono text-xs text-white"
+                  className="w-full rounded-xl border border-gray-300 bg-white p-2 font-mono text-xs text-gray-900"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-[11px] text-slate-400">
+                <label className="mb-1 block text-[11px] text-gray-500">
                   Nilai Akhir
                 </label>
                 <input
@@ -197,11 +194,11 @@ export function ResearchTab() {
                   step="any"
                   value={endVal}
                   onChange={(e) => setEndVal(Number(e.target.value))}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900 p-2 font-mono text-xs text-white"
+                  className="w-full rounded-xl border border-gray-300 bg-white p-2 font-mono text-xs text-gray-900"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-[11px] text-slate-400">
+                <label className="mb-1 block text-[11px] text-gray-500">
                   Interval (Step)
                 </label>
                 <input
@@ -209,28 +206,27 @@ export function ResearchTab() {
                   step="any"
                   value={stepVal}
                   onChange={(e) => setStepVal(Number(e.target.value))}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900 p-2 font-mono text-xs text-white"
+                  className="w-full rounded-xl border border-gray-300 bg-white p-2 font-mono text-xs text-gray-900"
                 />
               </div>
             </div>
 
             <button
               onClick={runExperiment}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-4 py-3 text-xs font-bold text-white shadow-lg shadow-emerald-600/20 transition cursor-pointer"
+              className="flex w-full items-center justify-center rounded-xl bg-emerald-700 hover:bg-emerald-800 px-4 py-3 text-xs font-bold text-white shadow-sm transition cursor-pointer"
             >
-              <Play className="h-4 w-4" />
               Jalankan Pengambilan Data Eksperimen
             </button>
           </div>
 
           {/* Right: Control Variables */}
           <div className="space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-800">
               Variabel Kontrol (Tetap)
             </h3>
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div>
-                <label className="mb-1 block text-[11px] text-slate-400">
+                <label className="mb-1 block text-[11px] text-gray-500">
                   Rasio F/I (X₂)
                 </label>
                 <input
@@ -238,11 +234,11 @@ export function ResearchTab() {
                   step="0.01"
                   value={fixedFi}
                   onChange={(e) => setFixedFi(Number(e.target.value))}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900 p-2 font-mono text-white"
+                  className="w-full rounded-xl border border-gray-300 bg-white p-2 font-mono text-gray-900"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-[11px] text-slate-400">
+                <label className="mb-1 block text-[11px] text-gray-500">
                   COD POME (g/L)
                 </label>
                 <input
@@ -250,25 +246,25 @@ export function ResearchTab() {
                   step="0.5"
                   value={fixedCod}
                   onChange={(e) => setFixedCod(Number(e.target.value))}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900 p-2 font-mono text-white"
+                  className="w-full rounded-xl border border-gray-300 bg-white p-2 font-mono text-gray-900"
                 />
               </div>
               {indepVar !== "tbsCapacity" && (
                 <div>
-                  <label className="mb-1 block text-[11px] text-slate-400">
+                  <label className="mb-1 block text-[11px] text-gray-500">
                     Kapasitas TBS (T/jam)
                   </label>
                   <input
                     type="number"
                     value={fixedTbs}
                     onChange={(e) => setFixedTbs(Number(e.target.value))}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-900 p-2 font-mono text-white"
+                    className="w-full rounded-xl border border-gray-300 bg-white p-2 font-mono text-gray-900"
                   />
                 </div>
               )}
               {indepVar !== "biocharDose" && (
                 <div>
-                  <label className="mb-1 block text-[11px] text-slate-400">
+                  <label className="mb-1 block text-[11px] text-gray-500">
                     Dosis Biochar (g/L)
                   </label>
                   <input
@@ -276,13 +272,13 @@ export function ResearchTab() {
                     step="0.1"
                     value={fixedBiochar}
                     onChange={(e) => setFixedBiochar(Number(e.target.value))}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-900 p-2 font-mono text-white"
+                    className="w-full rounded-xl border border-gray-300 bg-white p-2 font-mono text-gray-900"
                   />
                 </div>
               )}
               {indepVar !== "h2sInlet" && (
                 <div>
-                  <label className="mb-1 block text-[11px] text-slate-400">
+                  <label className="mb-1 block text-[11px] text-gray-500">
                     Inlet H₂S (ppm)
                   </label>
                   <input
@@ -290,7 +286,7 @@ export function ResearchTab() {
                     step="100"
                     value={fixedH2s}
                     onChange={(e) => setFixedH2s(Number(e.target.value))}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-900 p-2 font-mono text-white"
+                    className="w-full rounded-xl border border-gray-300 bg-white p-2 font-mono text-gray-900"
                   />
                 </div>
               )}
@@ -303,35 +299,35 @@ export function ResearchTab() {
         <>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {/* Graph 1: Methane Yield & Desirability */}
-            <div className="glass-card rounded-2xl p-5">
-              <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-emerald-400">
+            <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+              <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-emerald-800">
                 1. Respon Methane Yield (L/g VS) &amp; Desirability RSM vs {xLabel}
               </h3>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={results}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-                    <XAxis dataKey="xValue" stroke="#94a3b8" fontSize={11} />
-                    <YAxis stroke="#94a3b8" fontSize={11} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis dataKey="xValue" stroke="#6b7280" fontSize={11} />
+                    <YAxis stroke="#6b7280" fontSize={11} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: "#0f172a",
-                        borderColor: "#334155",
-                        color: "#f8fafc",
+                        backgroundColor: "#ffffff",
+                        borderColor: "#d1d5db",
+                        color: "#111827",
                       }}
                     />
                     <Legend />
                     <Line
                       type="monotone"
                       dataKey="methaneYield"
-                      stroke="#10b981"
+                      stroke="#15803d"
                       name="Methane Yield (L/g VS)"
                       strokeWidth={3}
                     />
                     <Line
                       type="monotone"
                       dataKey="desirability"
-                      stroke="#06b6d4"
+                      stroke="#0d9488"
                       name="Desirability RSM"
                       strokeWidth={2}
                       strokeDasharray="4 4"
@@ -342,22 +338,22 @@ export function ResearchTab() {
             </div>
 
             {/* Graph 2: Clean Power & NPV */}
-            <div className="glass-card rounded-2xl p-5">
-              <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-amber-400">
+            <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+              <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-amber-800">
                 2. Potensi Listrik (MW) &amp; NPV Proyek (Miliar Rp) vs {xLabel}
               </h3>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={results}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-                    <XAxis dataKey="xValue" stroke="#94a3b8" fontSize={11} />
-                    <YAxis yAxisId="left" stroke="#f59e0b" fontSize={11} />
-                    <YAxis yAxisId="right" orientation="right" stroke="#10b981" fontSize={11} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis dataKey="xValue" stroke="#6b7280" fontSize={11} />
+                    <YAxis yAxisId="left" stroke="#d97706" fontSize={11} />
+                    <YAxis yAxisId="right" orientation="right" stroke="#15803d" fontSize={11} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: "#0f172a",
-                        borderColor: "#334155",
-                        color: "#f8fafc",
+                        backgroundColor: "#ffffff",
+                        borderColor: "#d1d5db",
+                        color: "#111827",
                       }}
                     />
                     <Legend />
@@ -365,7 +361,7 @@ export function ResearchTab() {
                       yAxisId="left"
                       type="monotone"
                       dataKey="powerMW"
-                      stroke="#f59e0b"
+                      stroke="#d97706"
                       name="Daya Listrik (MW)"
                       strokeWidth={3}
                     />
@@ -373,7 +369,7 @@ export function ResearchTab() {
                       yAxisId="right"
                       type="monotone"
                       dataKey="npvMiliar"
-                      stroke="#10b981"
+                      stroke="#15803d"
                       name="NPV SOM (Miliar Rp)"
                       strokeWidth={2.5}
                     />
@@ -384,56 +380,42 @@ export function ResearchTab() {
           </div>
 
           {/* Data Table */}
-          <div className="glass-card rounded-2xl p-5 overflow-hidden">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm overflow-hidden">
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-sm font-bold text-white">
+              <h3 className="text-sm font-bold text-gray-900">
                 Tabel Hasil Pengambilan Data Parametrik
               </h3>
               <button
                 onClick={downloadCSV}
-                className="flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-3.5 py-2 text-xs font-bold text-white transition cursor-pointer"
+                className="flex items-center gap-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 px-3.5 py-2 text-xs font-bold text-white transition cursor-pointer"
               >
                 <Download className="h-3.5 w-3.5" />
                 Export Tabel ke CSV
               </button>
             </div>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-slate-300">
-                <thead className="border-b border-slate-800 bg-slate-900/90 font-mono text-[11px] uppercase text-slate-400">
+              <table className="w-full text-left text-xs text-gray-700">
+                <thead className="border-b border-gray-200 bg-gray-50 font-mono text-[11px] uppercase text-emerald-800">
                   <tr>
-                    <th className="px-4 py-3">{xLabel}</th>
-                    <th className="px-4 py-3">CH₄ Yield (L/g VS)</th>
-                    <th className="px-4 py-3">Desirability</th>
-                    <th className="px-4 py-3">Listrik (MW)</th>
-                    <th className="px-4 py-3">H₂S Out (ppm)</th>
-                    <th className="px-4 py-3">Reduksi GRK (tCO₂e)</th>
-                    <th className="px-4 py-3">NPV SOM (Miliar Rp)</th>
+                    <th className="px-4 py-2.5">{xLabel}</th>
+                    <th className="px-4 py-2.5">CH₄ Yield (L/g VS)</th>
+                    <th className="px-4 py-2.5">Desirability</th>
+                    <th className="px-4 py-2.5">Listrik (MW)</th>
+                    <th className="px-4 py-2.5">H₂S Outlet (ppm)</th>
+                    <th className="px-4 py-2.5">Reduksi GRK (tCO₂e)</th>
+                    <th className="px-4 py-2.5">NPV SOM (Miliar Rp)</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/60 font-mono">
+                <tbody className="divide-y divide-gray-100 font-mono">
                   {results.map((r, i) => (
-                    <tr key={i} className="hover:bg-slate-900/50">
-                      <td className="px-4 py-2.5 font-bold text-white">
-                        {r.xValue}
-                      </td>
-                      <td className="px-4 py-2.5 text-emerald-400">
-                        {r.methaneYield.toFixed(3)}
-                      </td>
-                      <td className="px-4 py-2.5 text-cyan-400">
-                        {r.desirability.toFixed(3)}
-                      </td>
-                      <td className="px-4 py-2.5 text-amber-400">
-                        {r.powerMW.toFixed(2)} MW
-                      </td>
-                      <td className="px-4 py-2.5 text-slate-200">
-                        {r.h2sOutlet} ppm
-                      </td>
-                      <td className="px-4 py-2.5 text-emerald-300">
-                        {r.carbonReduction.toLocaleString("id-ID")}
-                      </td>
-                      <td className="px-4 py-2.5 font-bold text-white">
-                        Rp {r.npvMiliar} M
-                      </td>
+                    <tr key={i} className="hover:bg-gray-50">
+                      <td className="px-4 py-2 font-bold text-gray-900">{r.xValue}</td>
+                      <td className="px-4 py-2 text-emerald-700 font-semibold">{r.methaneYield}</td>
+                      <td className="px-4 py-2 text-teal-700">{r.desirability}</td>
+                      <td className="px-4 py-2 text-amber-700">{r.powerMW}</td>
+                      <td className="px-4 py-2 text-gray-700">{r.h2sOutlet}</td>
+                      <td className="px-4 py-2 text-emerald-800">{r.carbonReduction.toLocaleString("id-ID")}</td>
+                      <td className="px-4 py-2 font-bold text-gray-900">Rp {r.npvMiliar} M</td>
                     </tr>
                   ))}
                 </tbody>

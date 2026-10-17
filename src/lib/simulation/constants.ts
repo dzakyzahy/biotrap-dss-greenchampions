@@ -1,8 +1,8 @@
 // ============================================================
-// BioTrap-SIM™ v2.6 DSS — Simulation Constants & Scientific Database
+// BioTrap-SIM™ v2.6 DSS - Simulation Constants & Scientific Database
 // GREEN CHAMPIONS 2026 | GREEN DEMOCRACY INSTITUTE (GDI)
 // Kategori: Green Technology & Clean Energy
-// TIM THINK3RS — INSTITUT TEKNOLOGI BANDUNG (ITB)
+// TIM THINK3RS - INSTITUT TEKNOLOGI BANDUNG (ITB)
 // 1. Muhammad Ilham Saripul Milah (Ketua Tim | Teknik Metalurgi - FTTM ITB)
 // 2. Dzaky Zahy Rabbani (Anggota Tim | Oseanografi - FITB ITB)
 // Dosen Pembimbing: Ir. Tria Laksana Achmad, S.T., M.T., Ph.D. (Teknik Metalurgi - FTTM ITB)
@@ -240,7 +240,7 @@ export const KUD_COMMUNITY_CONSTANTS = {
       waterRetentionBoostPct: 58.9,
     },
     HIGH_SULFUR: {
-      locationName: "Co-Location Hub Klaster Kalimantan Tengah (±100 PKS) — High-S Grade",
+      locationName: "Co-Location Hub Klaster Kalimantan Tengah (±100 PKS) - High-S Grade",
       availableSpentPelletTons: 24.5,
       lastValidated: "2026-10-16",
       sulfurContentPct: 7.8,

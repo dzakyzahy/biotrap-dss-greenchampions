@@ -17,9 +17,9 @@ const downloadFile = (content: string, filename: string, mimeType: string) => {
 
 export const exportSimulationData = (result: MassBalanceResult) => {
   const rows = [
-    ["BioTrap-SIM™ v2.6 DSS — Laporan Neraca Massa, Kinetika TFM & Telemetri H2S", "", ""],
+    ["BioTrap-SIM™ v2.6 DSS - Laporan Neraca Massa, Kinetika TFM & Telemetri H2S", "", ""],
     ["Kompetisi GREEN CHAMPIONS 2026 | Green Democracy Institute (GDI)", "", ""],
-    ["Tim Think3rs — Institut Teknologi Bandung (ITB)", "", ""],
+    ["Tim Think3rs - Institut Teknologi Bandung (ITB)", "", ""],
     ["Tanggal Export", new Date().toLocaleDateString("id-ID"), ""],
     ["", "", ""],
     ["=== 1. PARAMETER OPERASIONAL PKS & REAKTOR ===", "", ""],
@@ -75,9 +75,9 @@ export const exportEconomicReport = (econ: EconomicResult) => {
   const formatNum = (n: number) => Math.round(n).toLocaleString("id-ID");
 
   const rows = [
-    ["BioTrap-SIM™ v2.6 DSS — Laporan Valuasi Tekno-Ekonomi (Razor & Blade) & ESG", "", ""],
+    ["BioTrap-SIM™ v2.6 DSS - Laporan Valuasi Tekno-Ekonomi (Razor & Blade) & ESG", "", ""],
     ["Kompetisi GREEN CHAMPIONS 2026 | Green Democracy Institute (GDI)", "", ""],
-    ["Tim Think3rs — Institut Teknologi Bandung (ITB)", "", ""],
+    ["Tim Think3rs - Institut Teknologi Bandung (ITB)", "", ""],
     ["Tanggal Export", new Date().toLocaleDateString("id-ID"), ""],
     ["", "", ""],
     ["=== 1. UNIT ECONOMICS PER PKS (RAZOR & BLADE) ===", "", ""],
