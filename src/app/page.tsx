@@ -10,8 +10,8 @@ export default function LandingPage() {
     <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col font-sans">
       <Header />
 
-      {/* Hero Section: Full-width high-res plant background, right-aligned & positioned lower */}
-      <section className="relative w-full min-h-[82vh] flex items-end justify-end overflow-hidden bg-white border-b border-gray-200">
+      {/* Hero Section: Full-width high-res plant background + Green Champions Animated Snaking Ribbon on the right */}
+      <section className="relative w-full min-h-[84vh] flex items-end justify-end overflow-hidden bg-white border-b border-gray-200">
         {/* Crisp High-Res Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-left lg:bg-center bg-no-repeat"
@@ -19,13 +19,130 @@ export default function LandingPage() {
             backgroundImage: "url('/assets/hero_biotrap_plant.jpg')",
           }}
         />
-        {/* Smooth Editorial Gradient Overlay so right-side text is 100% legible and aesthetic */}
+        {/* Smooth Editorial Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/75 to-white/95 lg:from-transparent lg:via-white/80 lg:to-white" />
         <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-85" />
 
+        {/* Green Champions 2026 Signature Animated Multi-Color Snaking Ribbon (Right / Top-Right / Bottom-Right) */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-[65%] overflow-hidden z-[5] gc-snake-container"
+        >
+          <svg
+            viewBox="0 0 900 760"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-full object-cover opacity-90"
+            preserveAspectRatio="xMaxYMid slice"
+          >
+            <defs>
+              {/* Animated Green Champions Multi-Color Gradient (Royal Blue -> Gold Yellow -> Mint Aqua -> Emerald) */}
+              <linearGradient id="gcRibbonGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#1d4ed8">
+                  <animate
+                    attributeName="stop-color"
+                    values="#1d4ed8;#eab308;#14b8a6;#1d4ed8"
+                    dur="8s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="32%" stopColor="#facc15">
+                  <animate
+                    attributeName="stop-color"
+                    values="#facc15;#a7f3d0;#2563eb;#facc15"
+                    dur="8s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="68%" stopColor="#5eead4">
+                  <animate
+                    attributeName="stop-color"
+                    values="#5eead4;#10b981;#facc15;#5eead4"
+                    dur="8s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="100%" stopColor="#059669">
+                  <animate
+                    attributeName="stop-color"
+                    values="#059669;#1d4ed8;#10b981;#059669"
+                    dur="8s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+              </linearGradient>
+
+              <linearGradient id="gcRibbonGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#2563eb">
+                  <animate
+                    attributeName="stop-color"
+                    values="#2563eb;#10b981;#facc15;#2563eb"
+                    dur="10s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="50%" stopColor="#fde047">
+                  <animate
+                    attributeName="stop-color"
+                    values="#fde047;#2dd4bf;#1d4ed8;#fde047"
+                    dur="10s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="100%" stopColor="#14b8a6">
+                  <animate
+                    attributeName="stop-color"
+                    values="#14b8a6;#eab308;#059669;#14b8a6"
+                    dur="10s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+              </linearGradient>
+
+              {/* Soft 3D Tube Shadow */}
+              <filter id="gcTubeShadow" x="-15%" y="-15%" width="130%" height="130%">
+                <feDropShadow dx="0" dy="14" stdDeviation="16" floodColor="#0f172a" floodOpacity="0.14" />
+              </filter>
+            </defs>
+
+            {/* Background Soft S-Curve Track */}
+            <path
+              d="M 460 -40 C 690 20, 860 110, 820 250 C 780 390, 560 340, 620 490 C 680 640, 880 590, 830 790"
+              stroke="url(#gcRibbonGrad2)"
+              strokeWidth="74"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity="0.22"
+            />
+
+            {/* Primary Animated Snaking 3D Ribbon (Weaving along top-right & far-right edge) */}
+            <path
+              d="M 460 -40 C 690 20, 860 110, 820 250 C 780 390, 560 340, 620 490 C 680 640, 880 590, 830 790"
+              stroke="url(#gcRibbonGrad1)"
+              strokeWidth="74"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              filter="url(#gcTubeShadow)"
+              className="gc-snake-ribbon"
+            />
+
+            {/* Secondary Intertwined Snaking Ribbon */}
+            <path
+              d="M 740 -60 C 910 80, 730 220, 840 360 C 930 480, 760 620, 890 770"
+              stroke="url(#gcRibbonGrad2)"
+              strokeWidth="52"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              filter="url(#gcTubeShadow)"
+              opacity="0.85"
+              className="gc-snake-ribbon-secondary"
+            />
+          </svg>
+        </div>
+
         {/* Right-Aligned, Lower-Positioned Hero Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pt-32 pb-14 lg:pt-44 lg:pb-20 flex flex-col items-end text-right">
-          <div className="max-w-2xl flex flex-col items-end space-y-5">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-28 pb-14 lg:pt-40 lg:pb-20 flex flex-col items-end text-right lg:pr-28">
+          <div className="max-w-2xl flex flex-col items-end space-y-5 rounded-3xl bg-white/80 backdrop-blur-md p-6 sm:p-8 border border-white/90 shadow-[0_20px_60px_rgba(15,23,42,0.07)]">
             <span className="inline-block rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1.5 text-xs sm:text-sm font-semibold text-emerald-800 tracking-wide">
               GREEN CHAMPIONS 2026 | GREEN DEMOCRACY INSTITUTE (GDI)
             </span>
@@ -44,8 +161,8 @@ export default function LandingPage() {
               <strong className="text-amber-700">BioSulfur™</strong>.
             </p>
 
-            {/* Primary & Secondary Action Buttons (Right-aligned, clean without decorative icons) */}
-            <div className="w-full max-w-lg pt-3 flex flex-col items-end gap-3">
+            {/* Primary & Secondary Action Buttons */}
+            <div className="w-full max-w-lg pt-2 flex flex-col items-end gap-3">
               <div className="grid w-full grid-cols-1 sm:grid-cols-2 gap-3">
                 <Link
                   href="/simulation"
@@ -56,7 +173,7 @@ export default function LandingPage() {
                 </Link>
                 <Link
                   href="/empowerment"
-                  className="flex w-full items-center justify-center rounded-xl border-2 border-emerald-700 bg-white/90 hover:bg-emerald-50 py-4 px-5 text-base font-bold text-emerald-800 shadow-sm transition-all"
+                  className="flex w-full items-center justify-center rounded-xl border-2 border-emerald-700 bg-white hover:bg-emerald-50 py-4 px-5 text-base font-bold text-emerald-800 shadow-sm transition-all"
                 >
                   Kalkulator KUD Sawit
                 </Link>
@@ -65,19 +182,19 @@ export default function LandingPage() {
               <div className="grid w-full grid-cols-3 gap-2.5">
                 <Link
                   href="/about"
-                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white/95 hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-700 transition-colors"
+                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-700 transition-colors"
                 >
                   Metodologi
                 </Link>
                 <Link
                   href="/documentation"
-                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white/95 hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-700 transition-colors"
+                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-700 transition-colors"
                 >
                   Dokumentasi
                 </Link>
                 <Link
                   href="/team"
-                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white/95 hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-700 transition-colors"
+                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-700 transition-colors"
                 >
                   Pengembang
                 </Link>
@@ -159,7 +276,7 @@ export default function LandingPage() {
                   <h4 className="text-base font-bold text-gray-900">Pelet 5 mm + Modular Skid + BioTrap-SIM™ DSS</h4>
                 </div>
                 <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                  TRL 4-5 Validated
+                  TRL 5 Validated
                 </span>
               </div>
               <div className="p-4 flex-1 flex items-center justify-center bg-gray-50">
@@ -192,7 +309,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* 4 Core Pillars Grid (Clean Typography, No Cheesy Icons) */}
+        {/* 4 Core Pillars Grid */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="p-6 rounded-2xl bg-white border border-gray-200 shadow-sm flex flex-col justify-between">
             <div>
@@ -260,7 +377,7 @@ export default function LandingPage() {
             </span>
           </div>
           <p className="text-gray-500">
-            &copy; 2026 BioTrap-SIM v2.6 Decision Support System • Green Champions 2026 (Green Democracy Institute).
+            &copy; 2026 BioTrap-SIM™ v2.6 Decision Support System • Green Champions 2026 (Green Democracy Institute).
           </p>
         </div>
       </footer>

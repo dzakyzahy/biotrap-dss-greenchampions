@@ -10,7 +10,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:h-24 lg:h-28 lg:px-8">
-        {/* Left: Prominent Logos (2-3x larger) + Huge Brand Title */}
+        {/* Left: Prominent Logos (2-3x larger) + Huge Brand Title with TM */}
         <div className="flex items-center gap-4 sm:gap-6 lg:gap-8">
           <div className="flex items-center gap-3 sm:gap-5">
             <img
@@ -41,7 +41,7 @@ export function Header() {
                 backgroundImage: 'linear-gradient(to right, #0f172a, #15803d, #0d9488)',
               }}
             >
-              BioTrap-SIM
+              BioTrap-SIM<sup className="ml-0.5 text-sm sm:text-xl lg:text-2xl font-extrabold align-super text-teal-700">™</sup>
             </h1>
           </Link>
         </div>

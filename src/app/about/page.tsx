@@ -21,7 +21,7 @@ export default function AboutPage() {
         {/* Hero Header */}
         <div className="space-y-4 border-b border-gray-200 pb-8">
           <div className="inline-block px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider">
-            Metodologi Ilmiah &amp; Bukti Eksperimental (TRL 4-5)
+            Metodologi Ilmiah &amp; Bukti Eksperimental (TRL 5)
           </div>
           <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
             Rekayasa <span className="text-emerald-700">BioTrap-TKKS™</span> &amp; Siklus Tertutup{' '}

@@ -68,3 +68,38 @@ body {
 input[type="range"] {
   accent-color: #15803d;
 }
+
+@keyframes gcSnakeDash {
+  0% {
+    stroke-dashoffset: 1800;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -1800;
+  }
+}
+
+@keyframes gcSnakeFloat {
+  0%, 100% {
+    transform: translate3d(0px, 0px, 0px) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-12px, 14px, 0px) rotate(-1.5deg);
+  }
+}
+
+.gc-snake-ribbon {
+  stroke-dasharray: 920 880;
+  animation: gcSnakeDash 14s ease-in-out infinite;
+}
+
+.gc-snake-ribbon-secondary {
+  stroke-dasharray: 640 960;
+  animation: gcSnakeDash 18s ease-in-out infinite reverse;
+}
+
+.gc-snake-container {
+  animation: gcSnakeFloat 9s ease-in-out infinite;
+}

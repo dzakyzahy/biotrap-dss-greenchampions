@@ -124,7 +124,7 @@ export default function TeamPage() {
             <div className="shrink-0 flex flex-col items-center p-5 rounded-xl bg-gray-50 border border-gray-200 text-center">
               <span className="text-xs font-bold text-gray-900">Scientific Validation</span>
               <span className="text-xs font-mono font-semibold text-emerald-700 mt-1">
-                R² = 0.9850 • TRL 4-5
+                R² = 0.9850 • TRL 5
               </span>
             </div>
           </div>
