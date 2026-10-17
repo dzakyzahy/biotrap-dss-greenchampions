@@ -10,159 +10,180 @@ export default function LandingPage() {
     <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col font-sans">
       <Header />
 
-      {/* Hero Section: Full-width high-res plant background + Green Champions Animated Snaking Ribbon on the right */}
-      <section className="relative w-full min-h-[84vh] flex items-end justify-end overflow-hidden bg-white border-b border-gray-200">
-        {/* Crisp High-Res Background Image */}
+      {/* HERO SECTION:
+          Layer 1 (z-0): Plant Background Image + White Right-Side Fade
+          Layer 2 (z-10): Animated Colorful Snaking Ribbons (Right Text Area + Left/Upper Plant Area)
+          Layer 3 (z-20): Invisible Compartment with Wider Right-Bottom Text & Auto-Invert Blend Mode
+      */}
+      <section className="relative isolate w-full min-h-[85vh] flex items-end justify-end overflow-hidden bg-white border-b border-gray-200">
+        {/* LAYER 1 (BOTTOM): Crisp High-Res Plant Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-left lg:bg-center bg-no-repeat"
+          className="absolute inset-0 z-0 bg-cover bg-left lg:bg-center bg-no-repeat"
           style={{
             backgroundImage: "url('/assets/hero_biotrap_plant.jpg')",
           }}
         />
-        {/* Smooth Editorial Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/75 to-white/95 lg:from-transparent lg:via-white/80 lg:to-white" />
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-85" />
+        {/* Smooth Editorial Gradient Overlay so the right half is pure #ffffff for clean color-inversion math */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/85 to-white lg:from-transparent lg:via-white/90 lg:to-white" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-90" />
 
-        {/* Green Champions 2026 Signature Animated Multi-Color Snaking Ribbon (Right / Top-Right / Bottom-Right) */}
+        {/* LAYER 2 (MIDDLE): Green Champions 2026 Full-Canvas Snaking Ribbons */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-[65%] overflow-hidden z-[5] gc-snake-container"
+          className="pointer-events-none absolute inset-0 z-10 w-full h-full overflow-hidden"
         >
           <svg
-            viewBox="0 0 900 760"
+            viewBox="0 0 1600 900"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-full object-cover opacity-90"
-            preserveAspectRatio="xMaxYMid slice"
+            className="w-full h-full object-cover"
+            preserveAspectRatio="xMidYMid slice"
           >
             <defs>
-              {/* Animated Green Champions Multi-Color Gradient (Royal Blue -> Gold Yellow -> Mint Aqua -> Emerald) */}
+              {/* Gradient 1: Royal Blue -> Gold -> Teal -> Deep Emerald */}
               <linearGradient id="gcRibbonGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#1d4ed8">
                   <animate
                     attributeName="stop-color"
-                    values="#1d4ed8;#eab308;#14b8a6;#1d4ed8"
-                    dur="8s"
+                    values="#1d4ed8;#047857;#eab308;#1d4ed8"
+                    dur="7s"
                     repeatCount="indefinite"
                   />
                 </stop>
-                <stop offset="32%" stopColor="#facc15">
+                <stop offset="35%" stopColor="#eab308">
                   <animate
                     attributeName="stop-color"
-                    values="#facc15;#a7f3d0;#2563eb;#facc15"
-                    dur="8s"
+                    values="#eab308;#1d4ed8;#0d9488;#eab308"
+                    dur="7s"
                     repeatCount="indefinite"
                   />
                 </stop>
-                <stop offset="68%" stopColor="#5eead4">
+                <stop offset="70%" stopColor="#0d9488">
                   <animate
                     attributeName="stop-color"
-                    values="#5eead4;#10b981;#facc15;#5eead4"
-                    dur="8s"
+                    values="#0d9488;#eab308;#1d4ed8;#0d9488"
+                    dur="7s"
                     repeatCount="indefinite"
                   />
                 </stop>
-                <stop offset="100%" stopColor="#059669">
+                <stop offset="100%" stopColor="#047857">
                   <animate
                     attributeName="stop-color"
-                    values="#059669;#1d4ed8;#10b981;#059669"
-                    dur="8s"
+                    values="#047857;#0d9488;#047857;#047857"
+                    dur="7s"
                     repeatCount="indefinite"
                   />
                 </stop>
               </linearGradient>
 
+              {/* Gradient 2: Deep Emerald -> Gold -> Royal Blue -> Teal */}
               <linearGradient id="gcRibbonGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#2563eb">
+                <stop offset="0%" stopColor="#047857">
                   <animate
                     attributeName="stop-color"
-                    values="#2563eb;#10b981;#facc15;#2563eb"
-                    dur="10s"
+                    values="#047857;#2563eb;#d97706;#047857"
+                    dur="9s"
                     repeatCount="indefinite"
                   />
                 </stop>
-                <stop offset="50%" stopColor="#fde047">
+                <stop offset="45%" stopColor="#f59e0b">
                   <animate
                     attributeName="stop-color"
-                    values="#fde047;#2dd4bf;#1d4ed8;#fde047"
-                    dur="10s"
+                    values="#f59e0b;#0d9488;#1d4ed8;#f59e0b"
+                    dur="9s"
                     repeatCount="indefinite"
                   />
                 </stop>
-                <stop offset="100%" stopColor="#14b8a6">
+                <stop offset="100%" stopColor="#1d4ed8">
                   <animate
                     attributeName="stop-color"
-                    values="#14b8a6;#eab308;#059669;#14b8a6"
-                    dur="10s"
+                    values="#1d4ed8;#eab308;#047857;#1d4ed8"
+                    dur="9s"
                     repeatCount="indefinite"
                   />
                 </stop>
               </linearGradient>
-
-              {/* Soft 3D Tube Shadow */}
-              <filter id="gcTubeShadow" x="-15%" y="-15%" width="130%" height="130%">
-                <feDropShadow dx="0" dy="14" stdDeviation="16" floodColor="#0f172a" floodOpacity="0.14" />
-              </filter>
             </defs>
 
-            {/* Background Soft S-Curve Track */}
+            {/* Subtle Full Track Guide 1 (Upper-Left Plant -> Right Text Zone) */}
             <path
-              d="M 460 -40 C 690 20, 860 110, 820 250 C 780 390, 560 340, 620 490 C 680 640, 880 590, 830 790"
-              stroke="url(#gcRibbonGrad2)"
-              strokeWidth="74"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              opacity="0.22"
-            />
-
-            {/* Primary Animated Snaking 3D Ribbon (Weaving along top-right & far-right edge) */}
-            <path
-              d="M 460 -40 C 690 20, 860 110, 820 250 C 780 390, 560 340, 620 490 C 680 640, 880 590, 830 790"
+              d="M -80 180 C 220 -30, 480 340, 820 170 C 1140 10, 1010 520, 1340 470 C 1560 440, 1410 770, 1680 860"
               stroke="url(#gcRibbonGrad1)"
-              strokeWidth="74"
+              strokeWidth="68"
               strokeLinecap="round"
               strokeLinejoin="round"
-              filter="url(#gcTubeShadow)"
-              className="gc-snake-ribbon"
+              opacity="0.14"
             />
 
-            {/* Secondary Intertwined Snaking Ribbon */}
+            {/* Subtle Full Track Guide 2 (Top-Right -> Behind Text -> Left Over Plant Dome) */}
             <path
-              d="M 740 -60 C 910 80, 730 220, 840 360 C 930 480, 760 620, 890 770"
+              d="M 1520 -60 C 1220 120, 1520 350, 1140 430 C 780 510, 620 250, 310 470 C 110 610, 220 820, -80 870"
               stroke="url(#gcRibbonGrad2)"
-              strokeWidth="52"
+              strokeWidth="62"
               strokeLinecap="round"
               strokeLinejoin="round"
-              filter="url(#gcTubeShadow)"
-              opacity="0.85"
-              className="gc-snake-ribbon-secondary"
+              opacity="0.14"
+            />
+
+            {/* Animated Ribbon 1: Sweeps from Upper-Left Plant Towers across Center into Right-Bottom Text Area */}
+            <path
+              d="M -80 180 C 220 -30, 480 340, 820 170 C 1140 10, 1010 520, 1340 470 C 1560 440, 1410 770, 1680 860"
+              stroke="url(#gcRibbonGrad1)"
+              strokeWidth="68"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="gc-snake-ribbon-main"
+            />
+
+            {/* Animated Ribbon 2: Snakes from Top-Right down through the Hero Text and left across the Plant Dome */}
+            <path
+              d="M 1520 -60 C 1220 120, 1520 350, 1140 430 C 780 510, 620 250, 310 470 C 110 610, 220 820, -80 870"
+              stroke="url(#gcRibbonGrad2)"
+              strokeWidth="62"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="gc-snake-ribbon-cross"
             />
           </svg>
         </div>
 
-        {/* Right-Aligned, Lower-Positioned Hero Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-28 pb-14 lg:pt-40 lg:pb-20 flex flex-col items-end text-right lg:pr-28">
-          <div className="max-w-2xl flex flex-col items-end space-y-5 rounded-3xl bg-white/80 backdrop-blur-md p-6 sm:p-8 border border-white/90 shadow-[0_20px_60px_rgba(15,23,42,0.07)]">
-            <span className="inline-block rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1.5 text-xs sm:text-sm font-semibold text-emerald-800 tracking-wide">
+        {/* LAYER 3 (TOP): Invisible Compartment Positioned Bottom-Right & Wider to the Left */}
+        <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 pt-36 pb-8 lg:pt-48 lg:pb-12 flex flex-col items-end text-right">
+          {/* Invisible bounding wrapper (no background, no border, no shadow) */}
+          <div className="w-full max-w-3xl flex flex-col items-end space-y-5">
+            {/* Competition Pill Badge */}
+            <span className="inline-block rounded-full bg-emerald-50/90 border border-emerald-300 px-4 py-1.5 text-xs sm:text-sm font-bold text-emerald-900 tracking-wide">
               GREEN CHAMPIONS 2026 | GREEN DEMOCRACY INSTITUTE (GDI)
             </span>
 
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 leading-[1.08]">
+            {/* Heading + Paragraph with mix-blend-mode: difference so letters automatically invert when the ribbon passes behind them!
+                Note on complement colors over #ffffff:
+                - #f0e8d5 under difference on #ffffff renders as #0f172a (slate-900) and inverts to bright luminous white/gold when ribbon passes under it!
+                - #fa87a8 under difference on #ffffff renders as #057857 (emerald-700) and inverts when ribbon passes under it!
+                - #c8beb4 under difference on #ffffff renders as #374151 (gray-700) and inverts to bright white when ribbon passes under it!
+            */}
+            <h2
+              className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] mix-blend-difference select-text"
+              style={{ color: '#f0e8d5' }}
+            >
               BioTrap-TKKS™ &amp;{' '}
-              <span className="text-emerald-700">BioSulfur™</span> Decision Support System
+              <span style={{ color: '#fa87a8' }}>BioSulfur™</span> Decision Support System
             </h2>
 
-            <p className="text-base sm:text-lg text-gray-700 leading-relaxed max-w-xl">
+            <p
+              className="text-base sm:text-lg leading-relaxed max-w-2xl font-medium mix-blend-difference select-text"
+              style={{ color: '#d4cdc3' }}
+            >
               Platform simulasi rekayasa proses dan evaluasi tekno-ekonomi berbasis{' '}
-              <strong className="text-gray-900">Response Surface Methodology (RSM-CCD)</strong> dan{' '}
-              <strong className="text-gray-900">Transference Function Model (TFM)</strong> untuk mengonversi limbah padat TKKS menjadi katalis{' '}
-              <strong className="text-emerald-800">DIET In-Situ</strong>, adsorben desulfurisasi{' '}
-              <strong className="text-emerald-800">H₂S Lead-Lag Ex-Situ</strong>, serta pupuk sirkular{' '}
-              <strong className="text-amber-700">BioSulfur™</strong>.
+              <strong style={{ color: '#f0e8d5' }}>Response Surface Methodology (RSM-CCD)</strong> dan{' '}
+              <strong style={{ color: '#f0e8d5' }}>Transference Function Model (TFM)</strong> untuk mengonversi limbah padat TKKS menjadi katalis{' '}
+              <strong style={{ color: '#fa87a8' }}>DIET In-Situ</strong>, adsorben desulfurisasi{' '}
+              <strong style={{ color: '#fa87a8' }}>H₂S Lead-Lag Ex-Situ</strong>, serta pupuk sirkular{' '}
+              <strong style={{ color: '#4bc6f6' }}>BioSulfur™</strong>.
             </p>
 
-            {/* Primary & Secondary Action Buttons */}
-            <div className="w-full max-w-lg pt-2 flex flex-col items-end gap-3">
+            {/* Primary & Secondary Action Buttons (Solid Top Layer z-30) */}
+            <div className="relative z-30 w-full max-w-xl pt-2 flex flex-col items-end gap-3">
               <div className="grid w-full grid-cols-1 sm:grid-cols-2 gap-3">
                 <Link
                   href="/simulation"
@@ -173,7 +194,7 @@ export default function LandingPage() {
                 </Link>
                 <Link
                   href="/empowerment"
-                  className="flex w-full items-center justify-center rounded-xl border-2 border-emerald-700 bg-white hover:bg-emerald-50 py-4 px-5 text-base font-bold text-emerald-800 shadow-sm transition-all"
+                  className="flex w-full items-center justify-center rounded-xl border-2 border-emerald-700 bg-white/95 hover:bg-emerald-50 py-4 px-5 text-base font-bold text-emerald-800 shadow-sm transition-all"
                 >
                   Kalkulator KUD Sawit
                 </Link>
@@ -182,19 +203,19 @@ export default function LandingPage() {
               <div className="grid w-full grid-cols-3 gap-2.5">
                 <Link
                   href="/about"
-                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-700 transition-colors"
+                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white/95 hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-800 transition-colors"
                 >
                   Metodologi
                 </Link>
                 <Link
                   href="/documentation"
-                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-700 transition-colors"
+                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white/95 hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-800 transition-colors"
                 >
                   Dokumentasi
                 </Link>
                 <Link
                   href="/team"
-                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-700 transition-colors"
+                  className="flex items-center justify-center rounded-lg border border-gray-300 bg-white/95 hover:bg-gray-100 py-2.5 px-3 text-xs sm:text-sm font-semibold text-gray-800 transition-colors"
                 >
                   Pengembang
                 </Link>

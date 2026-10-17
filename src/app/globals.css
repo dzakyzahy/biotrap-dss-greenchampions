@@ -69,37 +69,30 @@ input[type="range"] {
   accent-color: #15803d;
 }
 
-@keyframes gcSnakeDash {
+@keyframes gcSnakeTravel {
   0% {
-    stroke-dashoffset: 1800;
+    stroke-dashoffset: 2600;
   }
-  50% {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes gcSnakeTravelReverse {
+  0% {
     stroke-dashoffset: 0;
   }
   100% {
-    stroke-dashoffset: -1800;
+    stroke-dashoffset: 2600;
   }
 }
 
-@keyframes gcSnakeFloat {
-  0%, 100% {
-    transform: translate3d(0px, 0px, 0px) rotate(0deg);
-  }
-  50% {
-    transform: translate3d(-12px, 14px, 0px) rotate(-1.5deg);
-  }
+.gc-snake-ribbon-main {
+  stroke-dasharray: 1150 1450;
+  animation: gcSnakeTravel 14s linear infinite;
 }
 
-.gc-snake-ribbon {
-  stroke-dasharray: 920 880;
-  animation: gcSnakeDash 14s ease-in-out infinite;
-}
-
-.gc-snake-ribbon-secondary {
-  stroke-dasharray: 640 960;
-  animation: gcSnakeDash 18s ease-in-out infinite reverse;
-}
-
-.gc-snake-container {
-  animation: gcSnakeFloat 9s ease-in-out infinite;
+.gc-snake-ribbon-cross {
+  stroke-dasharray: 1050 1550;
+  animation: gcSnakeTravelReverse 16s linear infinite;
 }
