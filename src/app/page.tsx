@@ -13,7 +13,7 @@ export default function LandingPage() {
       {/* HERO SECTION:
           Layer 1 (z-0): Plant Background Image + White Right-Side Fade
           Layer 2 (z-10): Animated Colorful Snaking Ribbons (Right Text Area + Left/Upper Plant Area)
-          Layer 3 (z-20): Invisible Compartment with Wider Right-Bottom Text & Auto-Invert Blend Mode
+          Layer 3 (z-20): Invisible Compartment with Larger Title & Description + Thin Black Text Outline
       */}
       <section className="relative isolate w-full min-h-[85vh] flex items-end justify-end overflow-hidden bg-white border-b border-gray-200">
         {/* LAYER 1 (BOTTOM): Crisp High-Res Plant Background Image */}
@@ -23,7 +23,7 @@ export default function LandingPage() {
             backgroundImage: "url('/assets/hero_biotrap_plant.jpg')",
           }}
         />
-        {/* Smooth Editorial Gradient Overlay so the right half is pure #ffffff for clean color-inversion math */}
+        {/* Smooth Editorial Gradient Overlay */}
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/85 to-white lg:from-transparent lg:via-white/90 lg:to-white" />
         <div className="absolute inset-0 z-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-90" />
 
@@ -148,41 +148,81 @@ export default function LandingPage() {
         </div>
 
         {/* LAYER 3 (TOP): Invisible Compartment Positioned Bottom-Right & Wider to the Left */}
-        <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 pt-36 pb-8 lg:pt-48 lg:pb-12 flex flex-col items-end text-right">
-          {/* Invisible bounding wrapper (no background, no border, no shadow) */}
-          <div className="w-full max-w-3xl flex flex-col items-end space-y-5">
-            {/* Competition Pill Badge */}
-            <span className="inline-block rounded-full bg-emerald-50/90 border border-emerald-300 px-4 py-1.5 text-xs sm:text-sm font-bold text-emerald-900 tracking-wide">
+        <div className="relative z-20 w-full max-w-[1480px] mx-auto px-6 sm:px-10 lg:px-14 pt-36 pb-8 lg:pt-44 lg:pb-12 flex flex-col items-end text-right">
+          {/* Invisible bounding wrapper */}
+          <div className="w-full max-w-4xl flex flex-col items-end space-y-6">
+            {/* Competition Pill Badge (Unchanged size) */}
+            <span className="inline-block rounded-full bg-emerald-50/95 border border-emerald-300 px-4 py-1.5 text-xs sm:text-sm font-bold text-emerald-900 tracking-wide">
               GREEN CHAMPIONS 2026 | GREEN DEMOCRACY INSTITUTE (GDI)
             </span>
 
-            {/* Heading + Paragraph with mix-blend-mode: difference so letters automatically invert when the ribbon passes behind them!
-                Note on complement colors over #ffffff:
-                - #f0e8d5 under difference on #ffffff renders as #0f172a (slate-900) and inverts to bright luminous white/gold when ribbon passes under it!
-                - #fa87a8 under difference on #ffffff renders as #057857 (emerald-700) and inverts when ribbon passes under it!
-                - #c8beb4 under difference on #ffffff renders as #374151 (gray-700) and inverts to bright white when ribbon passes under it!
-            */}
+            {/* Enlarged Title with Thin Black Outline */}
             <h2
-              className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] mix-blend-difference select-text"
-              style={{ color: '#f0e8d5' }}
+              className="text-4xl sm:text-6xl lg:text-[68px] font-black tracking-tight text-gray-900 leading-[1.06]"
+              style={{
+                paintOrder: 'stroke fill',
+                WebkitTextStroke: '1.5px #000000',
+                textShadow: '0 2px 12px rgba(255, 255, 255, 0.85)',
+              }}
             >
               BioTrap-TKKS™ &amp;{' '}
-              <span style={{ color: '#fa87a8' }}>BioSulfur™</span> Decision Support System
+              <span
+                className="text-emerald-600"
+                style={{
+                  paintOrder: 'stroke fill',
+                  WebkitTextStroke: '1.8px #000000',
+                }}
+              >
+                BioSulfur™
+              </span>{' '}
+              Decision Support System
             </h2>
 
+            {/* Enlarged Description with Thin Black Outline */}
             <p
-              className="text-base sm:text-lg leading-relaxed max-w-2xl font-medium mix-blend-difference select-text"
-              style={{ color: '#d4cdc3' }}
+              className="text-lg sm:text-xl lg:text-2xl text-gray-800 font-semibold leading-relaxed max-w-3xl"
+              style={{
+                paintOrder: 'stroke fill',
+                WebkitTextStroke: '0.65px #000000',
+                textShadow: '0 1px 10px rgba(255, 255, 255, 0.9)',
+              }}
             >
               Platform simulasi rekayasa proses dan evaluasi tekno-ekonomi berbasis{' '}
-              <strong style={{ color: '#f0e8d5' }}>Response Surface Methodology (RSM-CCD)</strong> dan{' '}
-              <strong style={{ color: '#f0e8d5' }}>Transference Function Model (TFM)</strong> untuk mengonversi limbah padat TKKS menjadi katalis{' '}
-              <strong style={{ color: '#fa87a8' }}>DIET In-Situ</strong>, adsorben desulfurisasi{' '}
-              <strong style={{ color: '#fa87a8' }}>H₂S Lead-Lag Ex-Situ</strong>, serta pupuk sirkular{' '}
-              <strong style={{ color: '#4bc6f6' }}>BioSulfur™</strong>.
+              <strong className="text-gray-950 font-extrabold">Response Surface Methodology (RSM-CCD)</strong> dan{' '}
+              <strong className="text-gray-950 font-extrabold">Transference Function Model (TFM)</strong> untuk mengonversi limbah padat TKKS menjadi katalis{' '}
+              <strong
+                className="text-emerald-600 font-extrabold"
+                style={{
+                  paintOrder: 'stroke fill',
+                  WebkitTextStroke: '0.9px #000000',
+                }}
+              >
+                DIET In-Situ
+              </strong>
+              , adsorben desulfurisasi{' '}
+              <strong
+                className="text-emerald-600 font-extrabold"
+                style={{
+                  paintOrder: 'stroke fill',
+                  WebkitTextStroke: '0.9px #000000',
+                }}
+              >
+                H₂S Lead-Lag Ex-Situ
+              </strong>
+              , serta pupuk sirkular{' '}
+              <strong
+                className="text-amber-500 font-extrabold"
+                style={{
+                  paintOrder: 'stroke fill',
+                  WebkitTextStroke: '0.9px #000000',
+                }}
+              >
+                BioSulfur™
+              </strong>
+              .
             </p>
 
-            {/* Primary & Secondary Action Buttons (Solid Top Layer z-30) */}
+            {/* Primary & Secondary Action Buttons (Unchanged size and no text outline) */}
             <div className="relative z-30 w-full max-w-xl pt-2 flex flex-col items-end gap-3">
               <div className="grid w-full grid-cols-1 sm:grid-cols-2 gap-3">
                 <Link
