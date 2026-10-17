@@ -48,36 +48,36 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-            <div className="lg:col-span-6 space-y-4 text-sm text-gray-700 leading-relaxed">
+          <div className="space-y-6">
+            <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
               <p>
                 Industri kelapa sawit Indonesia menghadapi <strong>Paradoks Limbah Ganda</strong>: setiap 1 ton TBS menghasilkan sekitar <strong className="text-amber-700">0,67 m³ limbah cair POME</strong> dengan beban organik ekstrem (<strong>COD 98,77 g/L</strong>; <strong>TS 64,23 g/L</strong>; <strong>VS 51,71 g/L</strong>) sekaligus <strong className="text-emerald-700">22-23% limbah padat TKKS</strong> yang menumpuk.
               </p>
               <p>
                 Di dalam biodigester anaerobik, tingginya beban organik memicu akumulasi <em>Volatile Fatty Acids</em> (VFA) yang menghambat metanogenesis (fase lag panjang) serta menghasilkan biogas kotor dengan kandungan <strong className="text-red-600">H₂S 1.500-3.500 ppm</strong> (jauh melampaui ambang batas korosi <em>Gas Engine</em> sebesar <strong>250 ppm</strong>).
               </p>
-              <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-200">
                   <span className="text-xs text-gray-500 block">COD POME Mentah vs Baku Mutu</span>
                   <span className="text-base font-bold font-mono text-amber-700">98.770 vs 350 mg/L</span>
                   <span className="text-xs text-red-600 block font-medium">282x di atas batas buang</span>
                 </div>
                 <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-200">
-                  <span className="text-xs text-gray-500 block">Rasio VS/TS POME</span>
-                  <span className="text-base font-bold font-mono text-emerald-700">0,81 (81% Volatil)</span>
-                  <span className="text-xs text-emerald-700 block font-medium">Substrat ideal metanogenesis</span>
+                  <span className="text-xs text-gray-500 block">Rasio VS/TS POME &amp; Penyisihan VS</span>
+                  <span className="text-base font-bold font-mono text-emerald-700">0,81 (95,1% VS Removal)</span>
+                  <span className="text-xs text-emerald-700 block font-medium">Substrat ideal metanogenesis terfasilitasi DIET</span>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-6 bg-gray-50 p-3 rounded-xl border border-gray-200">
+            <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-xs">
               <img
-                src="/assets/fig_paradoks_pks.png"
-                alt="Paradoks Limbah Ganda PKS dan Karakterisasi POME"
+                src="/assets/jurnal_fig1_pome_vfa.png"
+                alt="Profil Akumulasi VFA, Penyangga pH, dan Efisiensi Penyisihan VS/COD POME"
                 className="w-full h-auto rounded-lg object-contain"
               />
-              <p className="text-xs text-gray-500 text-center mt-2">
-                Gambar 1. Karakterisasi beban fisikokimia POME mentah dan krisis korosi H₂S pada fasilitas PLTBg PKS.
+              <p className="text-xs text-gray-500 italic text-center mt-3 max-w-4xl mx-auto">
+                Gambar 3.1 Profil akumulasi VFA dan kapasitas penyangga pH intrinsik pada digesti anaerobik POME (a), serta efisiensi penyisihan VS/COD dan kemurnian CH₄ terhadap variasi dosis biochar TKKS (b) (Dimodifikasi dari Yan dkk., 2025).
               </p>
             </div>
           </div>
@@ -91,20 +91,23 @@ export default function AboutPage() {
             </div>
             <div>
               <h2 className="text-xl md:text-2xl font-bold text-gray-900">
-                Mekanisme Sirkular 3 Tahap: In-Situ DIET, Ex-Situ H₂S Scrubbing &amp; BioSulfur™
+                Karakterisasi Fisikokimia Material: FE-SEM, EDX, Isoterm BET &amp; Konduktivitas DIET
               </h2>
               <p className="text-xs text-gray-500">
-                Konversi TKKS via pirolisis 950°C menjadi matriks karbon grafitik mesopori bermuatan mineral alkali intrinsik
+                Konversi TKKS via aktivasi uap satu tahap (950°C) menjadi matriks karbon grafitik mesopori bermuatan mineral alkali intrinsik
               </p>
             </div>
           </div>
 
-          <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-xs">
             <img
-              src="/assets/fig_tiga_tahap.png"
-              alt="Mekanisme 3 Tahap BioTrap-TKKS dan BioSulfur"
+              src="/assets/jurnal_fig2_fesem_bet_xrd.png"
+              alt="Karakterisasi FE-SEM, Spektrum EDX, Isoterm N2 BET, dan Konduktivitas DIET BioTrap-TKKS"
               className="w-full h-auto rounded-lg object-contain"
             />
+            <p className="text-xs text-gray-500 italic text-center mt-3 max-w-4xl mx-auto">
+              Gambar 3.2 Karakterisasi material BioTrap-TKKS™: (a) mikrograf FE-SEM struktur makropori sarang lebah (5-8 μm) dan kolonisasi biofilm konsorsium metanogen, (b) spektrum unsur EDX kaya mineral alkali (CaCO₃ 4,94%), (c) isoterm adsorpsi-desorpsi N₂ BET (Tipe IV, S_BET = 1.105 m²/g pada 950°C), serta (d) evolusi konduktivitas listrik DIET dan kapasitas kemisorpsi H₂S (Yan dkk., 2025; Angel dkk., 2025).
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs leading-relaxed">
@@ -113,7 +116,7 @@ export default function AboutPage() {
                 Tahap 1: Konduktor DIET In-Situ
               </div>
               <p className="text-gray-600">
-                Pada suhu pirolisis <strong>950°C</strong>, jaringan lignoselulosa TKKS mengalami karbonisasi lanjut membentuk kisi turbostratik grafitik (<code className="text-emerald-700 font-semibold">S_BET = 485 m²/g</code>) yang bertindak sebagai jembatan konduktif <strong>Direct Interspecies Electron Transfer (DIET)</strong> antara bakteri asidogenik dan arkea metanogenik.
+                Pada suhu pirolisis <strong>750-950°C</strong>, jaringan lignoselulosa TKKS mengalami karbonisasi lanjut membentuk kisi turbostratik grafitik (<code className="text-emerald-700 font-semibold">S_BET = 485-1.105 m²/g</code>) yang bertindak sebagai jembatan konduktif <strong>Direct Interspecies Electron Transfer (DIET)</strong> antara bakteri asidogenik dan arkea metanogenik.
               </p>
             </div>
 
@@ -122,7 +125,7 @@ export default function AboutPage() {
                 Tahap 2: Kemisorpsi H₂S Ex-Situ
               </div>
               <p className="text-gray-600">
-                Mineral bawaan TKKS (<code className="text-teal-700 font-semibold">CaCO₃ 4,94%</code>, K, Mg, SiO₂) membentuk situs basa aktif di permukaan pori yang mengkatalisis oksidasi kemisorpsi H₂S menjadi sulfur elemental (<code className="text-amber-700 font-semibold">S⁰</code>) dan sulfat (<code className="text-amber-700 font-semibold">SO₄²⁻</code>) pada kolom kembar <em>Lead-Lag</em> dengan efikasi <strong>96,4%</strong>.
+                Mineral bawaan TKKS (<code className="text-teal-700 font-semibold">CaCO₃ 4,94%</code>, K, Mg, SiO₂; <code className="text-teal-700 font-semibold">pH_pzc = 10,9</code>) membentuk situs basa aktif di permukaan pori yang mengkatalisis oksidasi kemisorpsi H₂S menjadi sulfur elemental (<code className="text-amber-700 font-semibold">S⁰</code>) dan sulfat (<code className="text-amber-700 font-semibold">SO₄²⁻</code>) dengan kapasitas <strong>64,2 mg H₂S/g</strong>.
               </p>
             </div>
 
@@ -131,7 +134,7 @@ export default function AboutPage() {
                 Tahap 3: Hilirisasi Pupuk BioSulfur™
               </div>
               <p className="text-gray-600">
-                Pelet jenuh sulfur yang dikeluarkan dari kolom scrubber memiliki rasio <strong>H/C = 0,15</strong> dan <strong>O/C = 0,04</strong> (stabilitas karbon ratusan tahun di tanah) serta bebas lindian logam berat/PAH, sehingga langsung bernilai jual sebagai pupuk <strong>BioSulfur™</strong>.
+                Pelet jenuh sulfur yang dikeluarkan dari kolom scrubber memiliki matriks karbon sangat stabil (<strong>C = 92,33%</strong>) serta bebas lindian logam berat/PAH, sehingga langsung bernilai jual sebagai pembenah tanah dan pupuk lepas lambat <strong>BioSulfur™</strong>.
               </p>
             </div>
           </div>
@@ -163,13 +166,13 @@ export default function AboutPage() {
               </div>
               <ul className="text-xs text-gray-700 space-y-1.5 list-disc list-inside">
                 <li>
-                  <strong>Variabel X₁ (Dosis BioTrap-TKKS™):</strong> Optimum pada <code className="text-emerald-700 font-semibold">2,0 g/L</code> (rentang uji 0 - 10,0 g/L).
+                  <strong>Variabel X₁ (Dosis BioTrap-TKKS™):</strong> Optimum pada <code className="text-emerald-700 font-semibold">2,0 g/L</code> (rentang uji 0 - 4,0 g/L).
                 </li>
                 <li>
                   <strong>Variabel X₂ (Rasio Food-to-Inoculum F/I):</strong> Optimum pada <code className="text-emerald-700 font-semibold">0,266</code> (rentang uji 0,10 - 0,50).
                 </li>
                 <li>
-                  <strong>Output Optimum:</strong> Yield metana spesifik <code className="text-gray-900 font-bold">338,2 mL CH₄/g VS</code> (+16,5% dibanding kontrol tanpa biochar 290,3 mL/g VS).
+                  <strong>Output Optimum (Desirability 0,940):</strong> Yield metana spesifik <code className="text-gray-900 font-bold">0,355 L CH₄/g VS</code> (+73,3% dibanding kontrol tanpa biochar 0,205 L/g VS; deviasi model &lt; 1,41%).
                 </li>
               </ul>
             </div>
@@ -183,31 +186,31 @@ export default function AboutPage() {
               </div>
               <ul className="text-xs text-gray-700 space-y-1.5 list-disc list-inside">
                 <li>
-                  <strong>Potensi Produksi Maksimum (P):</strong> <code className="text-amber-700 font-semibold">128,89 mL CH₄</code> (skala reaktor validasi).
+                  <strong>Potensi Produksi Maksimum (P):</strong> <code className="text-amber-700 font-semibold">0,355 L CH₄/g VS</code> (setara 2.950 mL biogas pada reaktor validasi, +45,0%).
                 </li>
                 <li>
-                  <strong>Laju Produksi Maksimum (Rₘₐₓ):</strong> <code className="text-amber-700 font-semibold">13,62 mL CH₄/hari</code>.
+                  <strong>Galat Pemodelan (RMSE):</strong> <code className="text-amber-700 font-semibold">0,0827</code> (presisi tinggi terhadap kurva aktual 30 hari).
                 </li>
                 <li>
-                  <strong>Fase Lag Negatif (λ):</strong> <code className="text-emerald-700 font-bold">-0,3362 hari</code> dengan koefisien determinasi <code className="text-gray-900 font-bold">R² = 0,9850</code> (p-value &lt; 0,0001), membuktikan bio-katalis langsung memicu metanogenesis seketika di hari ke-0.
+                  <strong>Fase Lag Negatif (λ):</strong> <code className="text-emerald-700 font-bold">-0,3362 hari</code> dengan koefisien determinasi <code className="text-gray-900 font-bold">R² = 0,9850</code> (p-value &lt; 0,0001), membuktikan bio-katalis mengeliminasi total fase tunda metanogenesis.
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-xs">
             <img
-              src="/assets/fig_validasi_sem_rsm_tfm.png"
-              alt="Bukti Validasi FE-SEM EDX, 3D RSM Contour, dan Kurva Kinetika TFM"
+              src="/assets/jurnal_fig3_rsm_tfm.png"
+              alt="Permukaan Respons 3D RSM-CCD, Peta Kontur 2D, dan Kurva Kinetika TFM"
               className="w-full h-auto rounded-lg object-contain"
             />
-            <p className="text-xs text-gray-500 text-center mt-2">
-              Gambar 2. Bukti karakterisasi mikrostruktur FE-SEM/EDX (pori sarang lebah &amp; CaCO₃ 4,94%), permukaan respons 3D RSM-CCD, dan kurva fitting kinetika TFM (R² = 0,9850).
+            <p className="text-xs text-gray-500 italic text-center mt-3 max-w-4xl mx-auto">
+              Gambar 3.3 Optimasi statistik dan kinetika bioproses: (a) permukaan respons 3D RSM-CCD hasil spesifik metana (p &lt; 0,0001; Desirability = 0,940), (b) peta kontur 2D dan matriks titik desain CCD (deviasi &lt; 1,41%), serta (c) kurva fitting kinetika Transference Function Model (TFM) terhadap data eksperimental (R² = 0,9850; RMSE = 0,0827; λ = -0,3362 hari) (Yan dkk., 2025).
             </p>
           </div>
         </section>
 
-        {/* Section 4: Life Cycle Assessment (LCA) & 4 Pilar SDGs */}
+        {/* Section 4: Validasi Purifikasi H2S, Slow-Release BioSulfur & Uji TCLP */}
         <section className="space-y-6 bg-white p-6 md:p-8 rounded-2xl border border-gray-200 shadow-sm">
           <div className="flex items-center space-x-3">
             <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-center font-bold">
@@ -215,20 +218,23 @@ export default function AboutPage() {
             </div>
             <div>
               <h2 className="text-xl md:text-2xl font-bold text-gray-900">
-                Life Cycle Assessment (LCA) Cradle-to-Cradle &amp; Kontribusi SDGs
+                Dinamika Breakthrough H₂S, Pelepasan Hara Lambat &amp; Keamanan Pelindihan TCLP
               </h2>
               <p className="text-xs text-gray-500">
-                Kuantifikasi dekarbonisasi 42.500 tCO₂e/tahun pada skala SOM 25 PKS (1.700 tCO₂e/tahun per PKS)
+                Validasi kolom adsorber Lead-Lag, retensi air tanah +58,9% (KTK &gt; 56 meq/100g), dan kepatuhan 100% Non-B3 (PP No. 22/2021)
               </p>
             </div>
           </div>
 
-          <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-xs">
             <img
-              src="/assets/fig_lca_sirkular.png"
-              alt="Diagram Alir Sirkularitas LCA dan 4 Pilar SDGs"
+              src="/assets/jurnal_fig4_h2s_tclp_biosulfur.png"
+              alt="Kurva Breakthrough H2S, Kinetika Slow-Release BioSulfur, dan Uji Pelindihan TCLP"
               className="w-full h-auto rounded-lg object-contain"
             />
+            <p className="text-xs text-gray-500 italic text-center mt-3 max-w-4xl mx-auto">
+              Gambar 3.4 Validasi purifikasi hilir dan keamanan lingkungan: (a) kurva breakthrough adsorpsi dinamis H₂S pada kolom tetap (C_in = 3.200 ppm; q_e = 64,2 mg/g), (b) kinetika pelepasan lambat (slow-release) sulfat (SO₄²⁻) pupuk BioSulfur™ di tanah Ultisol, serta (c) hasil uji pelindihan logam berat TCLP yang dimodifikasi terhadap baku mutu PP No. 22 Tahun 2021 (Angel dkk., 2025; Kavand &amp; Kazemian, 2025).
+            </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">

@@ -13,9 +13,9 @@ export default function LandingPage() {
       {/* HERO SECTION:
           Layer 1 (z-0): Plant Background Image + White Right-Side Fade
           Layer 2 (z-10): Animated Colorful Snaking Ribbons (Right Text Area + Left/Upper Plant Area)
-          Layer 3 (z-20): Invisible Compartment with Larger Title & Description + Thin Black Text Outline
+          Layer 3 (z-20): Invisible Compartment Aligned Top-Right with 2-Line Title & 3-Line Description
       */}
-      <section className="relative isolate w-full min-h-[85vh] flex items-end justify-end overflow-hidden bg-white border-b border-gray-200">
+      <section className="relative isolate w-full min-h-[85vh] flex items-start justify-end overflow-hidden bg-white border-b border-gray-200">
         {/* LAYER 1 (BOTTOM): Crisp High-Res Plant Background Image */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-left lg:bg-center bg-no-repeat"
@@ -147,8 +147,8 @@ export default function LandingPage() {
           </svg>
         </div>
 
-        {/* LAYER 3 (TOP): Invisible Compartment Positioned Bottom-Right & Wider to the Left */}
-        <div className="relative z-20 w-full max-w-[1480px] mx-auto px-6 sm:px-10 lg:px-14 pt-24 pb-8 lg:pt-28 lg:pb-12 flex flex-col items-end text-right">
+        {/* LAYER 3 (TOP): Invisible Compartment Positioned Top-Right & Wider to the Left */}
+        <div className="relative z-20 w-full max-w-[1480px] mx-auto px-6 sm:px-10 lg:px-14 pt-8 pb-12 lg:pt-10 lg:pb-16 flex flex-col items-end text-right">
           {/* Invisible bounding wrapper */}
           <div className="w-full max-w-[980px] flex flex-col items-end space-y-4">
             {/* Competition Pill Badge (Unchanged size) */}
@@ -182,48 +182,55 @@ export default function LandingPage() {
               </span>
             </h2>
 
-            {/* Description: Strictly Max 3 Lines on Laptop (100% Chrome), with Thin Black Outline */}
+            {/* Description: Strictly 3 Lines on Laptop (100% Chrome) with Larger Readable Font & Thin Black Outline */}
             <p
-              className="text-xs sm:text-sm lg:text-[15.5px] xl:text-base text-gray-800 font-semibold leading-relaxed max-w-[940px]"
+              className="text-sm sm:text-base lg:text-[18.5px] xl:text-[19.5px] text-gray-800 font-semibold leading-relaxed"
               style={{
                 paintOrder: 'stroke fill',
-                WebkitTextStroke: '0.45px #000000',
+                WebkitTextStroke: '0.55px #000000',
                 textShadow: '0 1px 10px rgba(255, 255, 255, 0.9)',
               }}
             >
-              Platform simulasi rekayasa proses dan evaluasi tekno-ekonomi berbasis{' '}
-              <strong className="text-gray-950 font-extrabold">Response Surface Methodology (RSM-CCD)</strong> dan{' '}
-              <strong className="text-gray-950 font-extrabold">Transference Function Model (TFM)</strong> untuk mengonversi limbah padat TKKS menjadi katalis{' '}
-              <strong
-                className="text-emerald-600 font-extrabold"
-                style={{
-                  paintOrder: 'stroke fill',
-                  WebkitTextStroke: '0.65px #000000',
-                }}
-              >
-                DIET In-Situ
-              </strong>
-              , adsorben desulfurisasi{' '}
-              <strong
-                className="text-emerald-600 font-extrabold"
-                style={{
-                  paintOrder: 'stroke fill',
-                  WebkitTextStroke: '0.65px #000000',
-                }}
-              >
-                H₂S Lead-Lag Ex-Situ
-              </strong>
-              , serta pupuk sirkular{' '}
-              <strong
-                className="text-amber-500 font-extrabold"
-                style={{
-                  paintOrder: 'stroke fill',
-                  WebkitTextStroke: '0.65px #000000',
-                }}
-              >
-                BioSulfur™
-              </strong>
-              .
+              <span className="lg:block lg:whitespace-nowrap">
+                Platform simulasi rekayasa proses dan evaluasi tekno-ekonomi berbasis{' '}
+                <strong className="text-gray-950 font-extrabold">Response Surface Methodology</strong>
+              </span>{' '}
+              <span className="lg:block lg:whitespace-nowrap">
+                <strong className="text-gray-950 font-extrabold">(RSM-CCD)</strong> dan{' '}
+                <strong className="text-gray-950 font-extrabold">Transference Function Model (TFM)</strong> untuk mengonversi limbah padat TKKS menjadi katalis
+              </span>{' '}
+              <span className="lg:block lg:whitespace-nowrap">
+                <strong
+                  className="text-emerald-600 font-extrabold"
+                  style={{
+                    paintOrder: 'stroke fill',
+                    WebkitTextStroke: '0.75px #000000',
+                  }}
+                >
+                  DIET In-Situ
+                </strong>
+                , adsorben desulfurisasi{' '}
+                <strong
+                  className="text-emerald-600 font-extrabold"
+                  style={{
+                    paintOrder: 'stroke fill',
+                    WebkitTextStroke: '0.75px #000000',
+                  }}
+                >
+                  H₂S Lead-Lag Ex-Situ
+                </strong>
+                , serta pupuk sirkular{' '}
+                <strong
+                  className="text-amber-500 font-extrabold"
+                  style={{
+                    paintOrder: 'stroke fill',
+                    WebkitTextStroke: '0.75px #000000',
+                  }}
+                >
+                  BioSulfur™
+                </strong>
+                .
+              </span>
             </p>
 
             {/* Primary & Secondary Action Buttons (Unchanged size and no text outline) */}
