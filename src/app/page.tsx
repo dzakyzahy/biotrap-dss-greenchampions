@@ -148,42 +148,46 @@ export default function LandingPage() {
         </div>
 
         {/* LAYER 3 (TOP): Invisible Compartment Positioned Bottom-Right & Wider to the Left */}
-        <div className="relative z-20 w-full max-w-[1480px] mx-auto px-6 sm:px-10 lg:px-14 pt-36 pb-8 lg:pt-44 lg:pb-12 flex flex-col items-end text-right">
+        <div className="relative z-20 w-full max-w-[1480px] mx-auto px-6 sm:px-10 lg:px-14 pt-24 pb-8 lg:pt-28 lg:pb-12 flex flex-col items-end text-right">
           {/* Invisible bounding wrapper */}
-          <div className="w-full max-w-4xl flex flex-col items-end space-y-6">
+          <div className="w-full max-w-[980px] flex flex-col items-end space-y-4">
             {/* Competition Pill Badge (Unchanged size) */}
             <span className="inline-block rounded-full bg-emerald-50/95 border border-emerald-300 px-4 py-1.5 text-xs sm:text-sm font-bold text-emerald-900 tracking-wide">
               GREEN CHAMPIONS 2026 | GREEN DEMOCRACY INSTITUTE (GDI)
             </span>
 
-            {/* Enlarged Title with Thin Black Outline */}
+            {/* Title: Strictly Max 2 Lines on Laptop, with Thin Black Outline */}
             <h2
-              className="text-4xl sm:text-6xl lg:text-[68px] font-black tracking-tight text-gray-900 leading-[1.06]"
+              className="text-2xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-black tracking-tight text-gray-900 leading-[1.12]"
               style={{
                 paintOrder: 'stroke fill',
-                WebkitTextStroke: '1.5px #000000',
+                WebkitTextStroke: '1.2px #000000',
                 textShadow: '0 2px 12px rgba(255, 255, 255, 0.85)',
               }}
             >
-              BioTrap-TKKS™ &amp;{' '}
-              <span
-                className="text-emerald-600"
-                style={{
-                  paintOrder: 'stroke fill',
-                  WebkitTextStroke: '1.8px #000000',
-                }}
-              >
-                BioSulfur™
-              </span>{' '}
-              Decision Support System
+              <span className="block sm:whitespace-nowrap">
+                BioTrap-TKKS™ &amp;{' '}
+                <span
+                  className="text-emerald-600"
+                  style={{
+                    paintOrder: 'stroke fill',
+                    WebkitTextStroke: '1.4px #000000',
+                  }}
+                >
+                  BioSulfur™
+                </span>
+              </span>
+              <span className="block sm:whitespace-nowrap">
+                Decision Support System
+              </span>
             </h2>
 
-            {/* Enlarged Description with Thin Black Outline */}
+            {/* Description: Strictly Max 3 Lines on Laptop (100% Chrome), with Thin Black Outline */}
             <p
-              className="text-lg sm:text-xl lg:text-2xl text-gray-800 font-semibold leading-relaxed max-w-3xl"
+              className="text-xs sm:text-sm lg:text-[15.5px] xl:text-base text-gray-800 font-semibold leading-relaxed max-w-[940px]"
               style={{
                 paintOrder: 'stroke fill',
-                WebkitTextStroke: '0.65px #000000',
+                WebkitTextStroke: '0.45px #000000',
                 textShadow: '0 1px 10px rgba(255, 255, 255, 0.9)',
               }}
             >
@@ -194,7 +198,7 @@ export default function LandingPage() {
                 className="text-emerald-600 font-extrabold"
                 style={{
                   paintOrder: 'stroke fill',
-                  WebkitTextStroke: '0.9px #000000',
+                  WebkitTextStroke: '0.65px #000000',
                 }}
               >
                 DIET In-Situ
@@ -204,7 +208,7 @@ export default function LandingPage() {
                 className="text-emerald-600 font-extrabold"
                 style={{
                   paintOrder: 'stroke fill',
-                  WebkitTextStroke: '0.9px #000000',
+                  WebkitTextStroke: '0.65px #000000',
                 }}
               >
                 H₂S Lead-Lag Ex-Situ
@@ -214,7 +218,7 @@ export default function LandingPage() {
                 className="text-amber-500 font-extrabold"
                 style={{
                   paintOrder: 'stroke fill',
-                  WebkitTextStroke: '0.9px #000000',
+                  WebkitTextStroke: '0.65px #000000',
                 }}
               >
                 BioSulfur™
