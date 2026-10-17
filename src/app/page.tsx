@@ -13,19 +13,19 @@ export default function LandingPage() {
       {/* HERO SECTION:
           Layer 1 (z-0): Plant Background Image + White Right-Side Fade
           Layer 2 (z-10): Animated Colorful Snaking Ribbons (Right Text Area + Left/Upper Plant Area)
-          Layer 3 (z-20): Invisible Compartment Aligned Top-Right with 2-Line Title & 3-Line Description
+          Layer 3 (z-20): Invisible Compartment Aligned Top-Right on Laptop (2-Line Title & 5-Line Description) + Dedicated Centered Mobile Layout
       */}
-      <section className="relative isolate w-full min-h-[85vh] flex items-start justify-end overflow-hidden bg-white border-b border-gray-200">
+      <section className="relative isolate w-full min-h-0 lg:min-h-[85vh] flex items-start justify-center lg:justify-end overflow-hidden bg-white border-b border-gray-200">
         {/* LAYER 1 (BOTTOM): Crisp High-Res Plant Background Image */}
         <div
-          className="absolute inset-0 z-0 bg-cover bg-left lg:bg-center bg-no-repeat"
+          className="absolute inset-0 z-0 bg-cover bg-center lg:bg-left xl:bg-center bg-no-repeat"
           style={{
             backgroundImage: "url('/assets/hero_biotrap_plant.jpg')",
           }}
         />
-        {/* Smooth Editorial Gradient Overlay */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/85 to-white lg:from-transparent lg:via-white/90 lg:to-white" />
-        <div className="absolute inset-0 z-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-90" />
+        {/* Smooth Editorial Gradient Overlay (Mobile: Soft Top-to-Bottom White Veil; Desktop: Left-to-Right Fade) */}
+        <div className="absolute inset-0 z-0 bg-white/82 sm:bg-white/78 lg:bg-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-white/88 lg:to-white" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-t from-white via-white/40 to-transparent lg:via-transparent opacity-95" />
 
         {/* LAYER 2 (MIDDLE): Green Champions 2026 Full-Canvas Snaking Ribbons */}
         <div
@@ -36,7 +36,7 @@ export default function LandingPage() {
             viewBox="0 0 1600 900"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-55 lg:opacity-100"
             preserveAspectRatio="xMidYMid slice"
           >
             <defs>
@@ -147,59 +147,61 @@ export default function LandingPage() {
           </svg>
         </div>
 
-        {/* LAYER 3 (TOP): Invisible Compartment Positioned Top-Right & Wider to the Left */}
-        <div className="relative z-20 w-full max-w-[1480px] mx-auto px-6 sm:px-10 lg:px-14 pt-8 pb-12 lg:pt-10 lg:pb-16 flex flex-col items-end text-right">
+        {/* LAYER 3 (TOP): Centered Responsive Mobile Layout (< lg) | Top-Right Invisible Compartment on Laptop (lg:) */}
+        <div className="relative z-20 w-full max-w-[1480px] mx-auto px-4 sm:px-8 lg:px-14 pt-7 pb-10 sm:pt-9 sm:pb-12 lg:pt-10 lg:pb-16 flex flex-col items-center text-center lg:items-end lg:text-right">
           {/* Invisible bounding wrapper */}
-          <div className="w-full max-w-[980px] flex flex-col items-end space-y-4">
-            {/* Competition Pill Badge (Unchanged size) */}
-            <span className="inline-block rounded-full bg-emerald-50/95 border border-emerald-300 px-4 py-1.5 text-xs sm:text-sm font-bold text-emerald-900 tracking-wide">
+          <div className="w-full max-w-xl lg:max-w-[780px] flex flex-col items-center lg:items-end space-y-4">
+            {/* Competition Pill Badge */}
+            <span className="inline-block max-w-full rounded-full bg-emerald-50/95 border border-emerald-300 px-3.5 py-1.5 sm:px-4 text-[10px] sm:text-xs lg:text-sm font-bold text-emerald-900 tracking-wide shadow-2xs">
               GREEN CHAMPIONS 2026 | GREEN DEMOCRACY INSTITUTE (GDI)
             </span>
 
-            {/* Title: Strictly Max 2 Lines on Laptop, with Thin Black Outline */}
+            {/* Title: Strictly 2 Lines on Laptop, Balanced Responsive Wrapping on Mobile */}
             <h2
-              className="text-2xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-black tracking-tight text-gray-900 leading-[1.12]"
+              className="text-[28px] sm:text-4xl lg:text-[44px] xl:text-[48px] font-black tracking-tight text-gray-900 leading-[1.14] lg:leading-[1.12]"
               style={{
                 paintOrder: 'stroke fill',
-                WebkitTextStroke: '1.2px #000000',
-                textShadow: '0 2px 12px rgba(255, 255, 255, 0.85)',
+                WebkitTextStroke: '1.1px #000000',
+                textShadow: '0 2px 12px rgba(255, 255, 255, 0.9)',
               }}
             >
-              <span className="block sm:whitespace-nowrap">
+              <span className="block lg:whitespace-nowrap">
                 BioTrap-TKKS™ &amp;{' '}
                 <span
                   className="text-emerald-600"
                   style={{
                     paintOrder: 'stroke fill',
-                    WebkitTextStroke: '1.4px #000000',
+                    WebkitTextStroke: '1.3px #000000',
                   }}
                 >
                   BioSulfur™
                 </span>
               </span>
-              <span className="block sm:whitespace-nowrap">
+              <span className="block lg:whitespace-nowrap">
                 Decision Support System
               </span>
             </h2>
 
-            {/* Description: Strictly 3 Lines on Laptop (100% Chrome) with Larger Readable Font & Thin Black Outline */}
+            {/* Description: Strictly 5 Lines on Laptop (Same Font Size lg:text-[18.5px] xl:text-[19.5px], Narrower Left Boundary) */}
             <p
-              className="text-sm sm:text-base lg:text-[18.5px] xl:text-[19.5px] text-gray-800 font-semibold leading-relaxed"
+              className="text-sm sm:text-base lg:text-[18.5px] xl:text-[19.5px] text-gray-800 font-semibold leading-relaxed max-w-md sm:max-w-lg lg:max-w-[640px]"
               style={{
                 paintOrder: 'stroke fill',
                 WebkitTextStroke: '0.55px #000000',
-                textShadow: '0 1px 10px rgba(255, 255, 255, 0.9)',
+                textShadow: '0 1px 10px rgba(255, 255, 255, 0.92)',
               }}
             >
               <span className="lg:block lg:whitespace-nowrap">
-                Platform simulasi rekayasa proses dan evaluasi tekno-ekonomi berbasis{' '}
-                <strong className="text-gray-950 font-extrabold">Response Surface Methodology</strong>
+                Platform simulasi rekayasa proses dan evaluasi tekno-ekonomi
               </span>{' '}
               <span className="lg:block lg:whitespace-nowrap">
-                <strong className="text-gray-950 font-extrabold">(RSM-CCD)</strong> dan{' '}
-                <strong className="text-gray-950 font-extrabold">Transference Function Model (TFM)</strong> untuk mengonversi limbah padat TKKS menjadi katalis
+                berbasis <strong className="text-gray-950 font-extrabold">Response Surface Methodology (RSM-CCD)</strong> dan
               </span>{' '}
               <span className="lg:block lg:whitespace-nowrap">
+                <strong className="text-gray-950 font-extrabold">Transference Function Model (TFM)</strong> untuk mengonversi limbah
+              </span>{' '}
+              <span className="lg:block lg:whitespace-nowrap">
+                padat TKKS menjadi katalis{' '}
                 <strong
                   className="text-emerald-600 font-extrabold"
                   style={{
@@ -209,7 +211,9 @@ export default function LandingPage() {
                 >
                   DIET In-Situ
                 </strong>
-                , adsorben desulfurisasi{' '}
+                , adsorben desulfurisasi
+              </span>{' '}
+              <span className="lg:block lg:whitespace-nowrap">
                 <strong
                   className="text-emerald-600 font-extrabold"
                   style={{
@@ -234,18 +238,18 @@ export default function LandingPage() {
             </p>
 
             {/* Primary & Secondary Action Buttons (Unchanged size and no text outline) */}
-            <div className="relative z-30 w-full max-w-xl pt-2 flex flex-col items-end gap-3">
+            <div className="relative z-30 w-full max-w-md sm:max-w-xl pt-2 flex flex-col items-center lg:items-end gap-3">
               <div className="grid w-full grid-cols-1 sm:grid-cols-2 gap-3">
                 <Link
                   href="/simulation"
-                  className="group flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 py-4 px-5 text-base font-bold text-white shadow-md transition-all"
+                  className="group flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 py-3.5 sm:py-4 px-5 text-base font-bold text-white shadow-md transition-all"
                 >
                   Mulai Simulasi DSS
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <Link
                   href="/empowerment"
-                  className="flex w-full items-center justify-center rounded-xl border-2 border-emerald-700 bg-white/95 hover:bg-emerald-50 py-4 px-5 text-base font-bold text-emerald-800 shadow-sm transition-all"
+                  className="flex w-full items-center justify-center rounded-xl border-2 border-emerald-700 bg-white/95 hover:bg-emerald-50 py-3.5 sm:py-4 px-5 text-base font-bold text-emerald-800 shadow-sm transition-all"
                 >
                   Kalkulator KUD Sawit
                 </Link>
