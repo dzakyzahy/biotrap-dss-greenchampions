@@ -1,0 +1,89 @@
+Berikut adalah cetak biru teknis (technical brief) dan panduan implementasi lengkap untuk rekan tim yang bertugas mengembangkan BioTrap-SIM™ Decision Support System (DSS) agar dapat segera dibangun, diuji, dan di-deploy ke Vercel untuk diambil screenshot serta mendapatkan live link pendaftaran.
+
+I. Rekomendasi Tech Stack untuk Deployment Cepat ke Vercel
+
+Agar aplikasi web dashboard dapat berjalan ringan, responsif, dan langsung kompatibel dengan serverless deployment Vercel, disarankan menggunakan:
+
+⚬ Frontend Framework: Next.js (React) atau Vite + React dengan styling Tailwind CSS (tampilan industrial dark-mode ala SaaS enterprise/dashboard IoT).
+⚬ Library Grafik / Visualisasi: Recharts atau Chart.js untuk grafik kinetika metana dan telemetri sensor real-time.
+⚬ Hosting / Deployment: Vercel (karena mendukung integrasi Git otomatis, kecepatan CDN global, dan ketersediaan free custom domain/subdomain *.vercel.app).
+
+II. Core Algorithmic Engine (Rumus & Model Matematika dalam DSS)
+
+Backend/logic di dalam dashboard harus memasukkan 4 model komputasi utama yang diadopsi dari riset acuan:
+
+1. Model Optimasi RSM-CCD (Response Surface Methodology):
+  ⚬ Fungsi: Menghitung estimasi peningkatan biometana berdasarkan dosis mikro-biochar (X_1: 0–4 g/L) dan rasio makanan/mikroorganisme / Feeding Intensity (X_2).
+  ⚬ Persamaan Regresi Kuadratik/2FI:
+    
+    $$\text{Methane Yield } (Y_1) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_{12} X_1 X_2 + \beta_{11} X_1^2 + \beta_{22} X_2^2$$
+  ⚬ Target Optimum (Desirability 0,940): Dosis biochar 2 g/L menghasilkan peningkatan biometana +73,3\% (0,355\text{ L/g VS}).
+2. Transference Function Model (TFM) — Kurva Produksi Kinetika:
+  ⚬ Fungsi: Memproyeksikan laju akumulasi gas harian tanpa fase tunda (lag phase).
+  ⚬ Parameter Kunci: Mengatur nilai konstanta waktu agar kurva langsung naik eksponensial tanpa jeda (\lambda = -0,3362\text{ hari}).
+3. Algoritma Lead-Lag H2S Scrubber & Switching Otomatis:
+  ⚬ Fungsi: Memantau titik jenuhan pelet aktif BioTrap-TKKS™ di dalam kolom kembar paralel.
+  ⚬ Logika Kontrol:
+    ⚬ Inlet H2S: 1.500 - 4.000\text{ ppm}.
+    ⚬ Outlet Target: <50\text{ ppm} (batas aman gas engine).
+    ⚬ Trigger Switch: Jika sensor mendeteksi outlet \ge 45\text{ ppm} atau \Delta\text{ Pressure} \ge 15\text{ mbar}, sistem otomatis mengirim sinyal valve switching ke kolom cadangan (operasi kontinu 24/7).
+4. Kalkulator ESG & Carbon Credit:
+  ⚬ Fungsi: Menghitung akumulasi reduksi emisi GRK secara otomatis.
+  ⚬ Formula Konversi: Mengalikan volume biometana bersih yang dimanfaatkan dengan faktor emisi metana menghindari pelepasan terbuka (GWP metana = 28–36), menghasilkan metrik kumulatif hingga 42.500\text{ tCO}_2\text{e/tahun} pada skala 25 PKS.
+
+III. Desain Antarmuka Halaman Web Dashboard (UI Mockup untuk Screenshot)
+
+Bagi rekan tim yang mendesain frontend, bagi layar dashboard menjadi 4 panel utama agar sesuai dengan tampilan pitch deck:
+
+⚬ Panel 1: Global PKS Parameter Input (Sidebar/Top Bar)
+  ⚬ Slider input: Kapasitas TBS (30–60 ton/jam), Debit POME masuk (500 - 1.000\text{ m}^3/\text{hari}), dan Kadar COD awal (98,77\text{ g/L}).
+⚬ Panel 2: Smart Dosing & Biogas Yield Predictor (Grafik Utama)
+  ⚬ Menampilkan grafik kurva komparasi produksi metana (Kontrol vs Injeksi Bio-char +73,3\%) dan kotak rekomendasi dosis harian (contoh: "Rekomendasi Dosis Optimal: 2,01 g/L").
+⚬ Panel 3: Lead-Lag Scrubber Telemetry (Status Hardware)
+  ⚬ Visualisasi dua tabung reaktor (Kolom A: Active / Saturated 82%, Kolom B: Standby / Fresh). Indikator angka digital real-time: Inlet 3.200\text{ ppm}, Outlet 18\text{ ppm} (Status: AMAN / <50 PPM).
+⚬ Panel 4: Razor & Blade Supply Chain & ESG Counter
+  ⚬ Notifikasi otomatis: "Status Pelet BioTrap-TKKS: Sisa 18 hari masa pakai. Jadwal repeat order otomatis dikirim ke Co-Location Hub." Serta counter berjalan total reduksi emisi (42.500 tCO2e).
+
+IV. Panduan Cepat Deployment ke Vercel (Step-by-Step untuk Temanmu)
+
+1. Inisialisasi Project Lokal:
+   npx create-next-app@latest biotrap-sim-dss
+   # atau jika pakai Vite + React:
+   npm create vite@latest biotrap-sim-dss -- --template react
+   
+2. Struktur Folder Minimum:
+   biotrap-sim-dss/
+   ├── public/
+   ├── src/
+   │   ├── components/
+   │   │   ├── DashboardHeader.jsx
+   │   │   ├── MethaneChart.jsx
+   │   │   ├── LeadLagStatus.jsx
+   │   │   └── DosingAdvisor.jsx
+   │   ├── utils/
+   │   │   └── mathModels.js (Berisi rumus RSM-CCD & TFM)
+   │   └── App.jsx (atau page.jsx untuk Next.js)
+   ├── package.json
+   └── tailwind.config.js
+   
+3. Push ke GitHub:
+  ⚬ Buat repositori baru di akun GitHub masing-masing (misal: biotrap-sim-dss).
+  ⚬ Hubungkan dan push kode lokal ke GitHub:
+    git init
+    git add .
+    git commit -m "Initial commit BioTrap-SIM DSS"
+    git branch -M main
+    git remote add origin https://github.com/username/biotrap-sim-dss.git
+    git push -u origin main
+    
+4. Deploy Instan di Vercel:
+  ⚬ Buka vercel.com (login menggunakan akun GitHub).
+  ⚬ Klik "Add New..." \rightarrow Project.
+  ⚬ Pilih repositori biotrap-sim-dss dari daftar GitHub kamu.
+  ⚬ Pada pengaturan Configure Project, biarkan pengaturan default (Framework Preset otomatis terdeteksi seperti Next.js atau Vite).
+  ⚬ Klik Deploy.
+  ⚬ Dalam 30 detik, Vercel akan menghasilkan live URL (contoh: biotrap-sim-dss.vercel.app).
+5. Pengambilan Bukti untuk Proposal/Pitch Deck:
+  ⚬ Buka tautan Vercel tersebut di browser laptop.
+  ⚬ Ambil screenshot layar penuh (full-screen dashboard) saat parameter simulasi aktif.
+  ⚬ Masukkan gambar tangkapan layar tersebut ke Slide 6 dan Slide 10 pada pitch deck, serta tempelkan tautan URL Vercel-nya di Slide 14 dan kolom formulir pendaftaran.

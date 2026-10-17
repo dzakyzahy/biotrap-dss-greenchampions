@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioTrap-SIM™ DSS | Intelligent Circular Bioenergy & H2S Desulfurization</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            slate: {
+              850: '#111827',
+              900: '#0b1120',
+              950: '#060a12',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #060a12;
+      color: #f8fafc;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.10) 0px, transparent 50%);
+    }
+    .glass-card {
+      background: rgba(17, 24, 39, 0.78);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card-emerald {
+      background: linear-gradient(145deg, rgba(16, 185, 129, 0.12), rgba(17, 24, 39, 0.85));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    input[type="range"] {
+      accent-color: #10b981;
+    }
+    .pulse-dot {
+      animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse-ring {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.15); }
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-white pb-12">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="sticky top-0 z-50 glass-card border-b border-slate-800/80 px-6 py-3.5">
+    <div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-4">
+      <!-- Brand Identity -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+          <i data-lucide="cpu" class="w-6 h-6 text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h1 class="text-lg font-extrabold tracking-tight text-white">BioTrap-SIM™ <span class="text-emerald-400 font-mono text-sm px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30">v2.6 DSS</span></h1>
+            <span class="hidden md:inline-flex items-center gap-1.5 text-xs font-medium text-emerald-400 bg-emerald-950/80 border border-emerald-700/50 px-2.5 py-0.5 rounded-full">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span> TELEMETRY ONLINE
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">Dual-Stage Biochar Engineering, H₂S Lead-Lag Scrubber & Circular BioSulfur™ Decision Support System</p>
+        </div>
+      </div>
+
+      <!-- Institutional & Competition Credentials -->
+      <div class="flex items-center gap-4 text-right">
+        <div class="hidden xl:block border-r border-slate-800 pr-4">
+          <p class="text-xs font-semibold text-slate-200">TIM THINK3RS — INSTITUT TEKNOLOGI BANDUNG (ITB)</p>
+          <p class="text-[11px] text-slate-400">M. Ilham S. Milah (Metalurgi) • Dzaky Zahy R. (Oseanografi) | Advisor: Ir. Tria Laksana Achmad, Ph.D.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-mono bg-slate-800/90 border border-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> GREEN CHAMPIONS 2026
+          </span>
+          <button onclick="resetOptimal()" class="text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 shadow-lg shadow-emerald-600/20">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Set Optimum (RSM-CCD)
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN DASHBOARD CONTAINER -->
+  <main class="max-w-[1600px] mx-auto px-6 pt-6 space-y-6">
+
+    <!-- TOP KPI METRICS BAR (4 HIGH-IMPACT CARDS) -->
+    <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+      <!-- KPI 1: Methane Yield -->
+      <div class="glass-card-emerald rounded-2xl p-4 relative overflow-hidden">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wider text-emerald-300/90">Prediksi Methane Yield (DIET)</p>
+            <div class="flex items-baseline gap-2 mt-1">
+              <h2 id="kpi-yield" class="text-3xl font-extrabold font-mono text-white">0.355</h2>
+              <span class="text-sm font-mono text-emerald-300">L CH₄ / g VS</span>
+            </div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-400">
+            <i data-lucide="flame" class="w-5 h-5"></i>
+          </div>
+        </div>
+        <div class="mt-3 flex items-center justify-between text-xs">
+          <span id="kpi-yield-boost" class="font-semibold text-emerald-400 bg-emerald-950/90 px-2 py-0.5 rounded border border-emerald-700/50">+73.3% vs Kontrol (0.205)</span>
+          <span class="text-slate-400 font-mono">Lag λ = -0.336 d</span>
+        </div>
+      </div>
+
+      <!-- KPI 2: H2S Outlet Purification -->
+      <div class="glass-card rounded-2xl p-4 relative overflow-hidden border-l-4 border-l-cyan-500">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wider text-slate-400">Konsentrasi H₂S Outlet Skid</p>
+            <div class="flex items-baseline gap-2 mt-1">
+              <h2 id="kpi-h2s-out" class="text-3xl font-extrabold font-mono text-cyan-400">18</h2>
+              <span class="text-sm font-mono text-slate-400">ppm (Target &lt;50)</span>
+            </div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+            <i data-lucide="filter" class="w-5 h-5"></i>
+          </div>
+        </div>
+        <div class="mt-3 flex items-center justify-between text-xs">
+          <span id="kpi-h2s-eff" class="font-semibold text-cyan-300 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/50">Efisiensi Serap: 99.28%</span>
+          <span class="text-slate-400 font-mono">BET: 1,105 m²/g</span>
+        </div>
+      </div>
+
+      <!-- KPI 3: Clean Power Generation -->
+      <div class="glass-card rounded-2xl p-4 relative overflow-hidden border-l-4 border-l-amber-500">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wider text-slate-400">Potensi Listrik Bersih On-Site</p>
+            <div class="flex items-baseline gap-2 mt-1">
+              <h2 id="kpi-power" class="text-3xl font-extrabold font-mono text-amber-400">1.20</h2>
+              <span class="text-sm font-mono text-slate-400">MW Elektrik</span>
+            </div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400">
+            <i data-lucide="zap" class="w-5 h-5"></i>
+          </div>
+        </div>
+        <div class="mt-3 flex items-center justify-between text-xs">
+          <span id="kpi-biogas-vol" class="font-semibold text-amber-300 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-800/50">14,200 Nm³/hari Biometana</span>
+          <span class="text-slate-400 font-mono">VS Rem: 95.1%</span>
+        </div>
+      </div>
+
+      <!-- KPI 4: Live ESG & Carbon Reduction -->
+      <div class="glass-card rounded-2xl p-4 relative overflow-hidden border-l-4 border-l-emerald-500">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wider text-slate-400">Reduksi Emisi GRK (Skala SOM)</p>
+            <div class="flex items-baseline gap-2 mt-1">
+              <h2 id="kpi-carbon" class="text-3xl font-extrabold font-mono text-emerald-400">42,500</h2>
+              <span class="text-sm font-mono text-slate-400">tCO₂e / tahun</span>
+            </div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+            <i data-lucide="leaf" class="w-5 h-5"></i>
+          </div>
+        </div>
+        <div class="mt-3 flex items-center justify-between text-xs">
+          <span class="font-semibold text-emerald-300 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/50">100% Zero B3 Waste</span>
+          <span class="text-slate-400 font-mono">LCA: -68.5% CO₂</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN WORKSPACE GRID (12 COLUMNS) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- LEFT COLUMN (4 COLS): SMART DOSING ADVISOR & PKS INPUT PARAMETERS -->
+      <div class="lg:col-span-4 space-y-6">
+        
+        <!-- Panel A: Parameter Input PKS & Biodigester -->
+        <div class="glass-card rounded-2xl p-5">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+            <div class="flex items-center gap-2">
+              <i data-lucide="sliders" class="w-4 h-4 text-emerald-400"></i>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-white">1. Parameter Operasional PKS & Reaktor</h3>
+            </div>
+            <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded">Real-Time Sim</span>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Slider 1: Kapasitas PKS -->
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-slate-300 font-medium">Kapasitas Olah PKS (TBS)</span>
+                <span id="val-tbs" class="font-mono font-bold text-emerald-400">45 Ton/jam</span>
+              </div>
+              <input id="input-tbs" type="range" min="30" max="60" step="5" value="45" oninput="updateSimulation()" class="w-full h-1.5 bg-slate-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-0.5">
+                <span>30 T/jam (PKS Kecil)</span>
+                <span>45 T/jam (Standar)</span>
+                <span>60 T/jam (Besar)</span>
+              </div>
+            </div>
+
+            <!-- Slider 2: Beban COD POME -->
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-slate-300 font-medium">Konsentrasi COD POME Inlet</span>
+                <span id="val-cod" class="font-mono font-bold text-cyan-400">98.77 g/L</span>
+              </div>
+              <input id="input-cod" type="range" min="65" max="115" step="0.5" value="98.77" oninput="updateSimulation()" class="w-full h-1.5 bg-slate-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-0.5">
+                <span>65 g/L</span>
+                <span>Karakteristik Asli: 98.77 g/L (pH 4.62)</span>
+                <span>115 g/L</span>
+              </div>
+            </div>
+
+            <!-- Slider 3: Dosis Mikro-Biochar (X1) -->
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-800/40">
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-emerald-200 font-semibold">Dosis Aditif Mikro-Biochar TKKS (X₁)</span>
+                <span id="val-biochar" class="font-mono font-bold text-emerald-400">2.00 g/L</span>
+              </div>
+              <input id="input-biochar" type="range" min="0" max="4" step="0.1" value="2.0" oninput="updateSimulation()" class="w-full h-1.5 bg-slate-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-emerald-400/70 font-mono mt-1">
+                <span>0.0 g/L (Kontrol)</span>
+                <span>★ Optimum RSM: 2.0 g/L</span>
+                <span>4.0 g/L (Overdose)</span>
+              </div>
+            </div>
+
+            <!-- Slider 4: Rasio F/I (X2) -->
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-slate-300 font-medium">Feed-to-Inoculum Ratio / FI (X₂)</span>
+                <span id="val-fi" class="font-mono font-bold text-emerald-400">0.266</span>
+              </div>
+              <input id="input-fi" type="range" min="0.15" max="0.45" step="0.005" value="0.266" oninput="updateSimulation()" class="w-full h-1.5 bg-slate-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-0.5">
+                <span>0.150</span>
+                <span>★ Optimum RSM: 0.266</span>
+                <span>0.450</span>
+              </div>
+            </div>
+
+            <!-- Slider 5: Raw H2S Inlet -->
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-slate-300 font-medium">Kadar Gas H₂S Mentah (Inlet Skid)</span>
+                <span id="val-h2s-in" class="font-mono font-bold text-rose-400">2,500 ppm</span>
+              </div>
+              <input id="input-h2s" type="range" min="1500" max="4000" step="100" value="2500" oninput="updateSimulation()" class="w-full h-1.5 bg-slate-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-0.5">
+                <span>1,500 ppm</span>
+                <span>Rata-rata: 2,500 ppm</span>
+                <span>4,000 ppm (Ekstrem)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Smart Dosing Recommendation Box -->
+          <div class="mt-5 p-3.5 rounded-xl bg-slate-900/90 border border-slate-700/80 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                <i data-lucide="brain-circuit" class="w-4 h-4"></i> AI SMART DOSING ADVISOR
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">Desirability: <strong id="val-desirability" class="text-emerald-400">0.940</strong></span>
+            </div>
+            <p id="advisor-text" class="text-xs text-slate-300 leading-relaxed">
+              Kondisi <strong>OPTIMAL</strong> tercapai. Injeksi mikro-biochar <strong>2.00 g/L</strong> (10–500 µm) memaksimalkan konduktivitas transfer elektron langsung (DIET) bakteri-arkea tanpa gejala inhibisi asam volatil (VFA).
+            </p>
+          </div>
+        </div>
+
+        <!-- Panel B: Neraca Massa & Energi Harian PKS -->
+        <div class="glass-card rounded-2xl p-5">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+            <div class="flex items-center gap-2">
+              <i data-lucide="scale" class="w-4 h-4 text-cyan-400"></i>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-white">2. Neraca Massa Harian (Live Balance)</h3>
+            </div>
+            <span class="text-[11px] font-mono text-cyan-400">Closed-Loop</span>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <div class="flex justify-between py-1.5 border-b border-slate-800/70">
+              <span class="text-slate-400">Umpan Limbah Cair POME:</span>
+              <span id="mass-pome" class="font-mono font-semibold text-white">700 m³/hari (29.2 m³/jam)</span>
+            </div>
+            <div class="flex justify-between py-1.5 border-b border-slate-800/70">
+              <span class="text-slate-400">Kebutuhan Mikro-Biochar Digester:</span>
+              <span id="mass-micro" class="font-mono font-semibold text-emerald-400">1,400 kg/hari (2.0 g/L)</span>
+            </div>
+            <div class="flex justify-between py-1.5 border-b border-slate-800/70">
+              <span class="text-slate-400">Timbulan Biomassa Padat TKKS:</span>
+              <span id="mass-tkks" class="font-mono font-semibold text-white">230 Ton/hari (9.6 T/jam)</span>
+            </div>
+            <div class="flex justify-between py-1.5 border-b border-slate-800/70">
+              <span class="text-slate-400">Produksi Pelet BioTrap-TKKS™ (950°C):</span>
+              <span id="mass-pellet" class="font-mono font-semibold text-cyan-400">1.20 Ton/hari (36 T/bulan)</span>
+            </div>
+            <div class="flex justify-between py-1.5">
+              <span class="text-slate-400">Output Pupuk Sirkular BioSulfur™:</span>
+              <span id="mass-fertilizer" class="font-mono font-semibold text-amber-400">2.40 Ton/hari (Karung 50 kg)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CENTER & RIGHT COLUMNS (8 COLS): CHARTS, LEAD-LAG SKID & SUPPLY CHAIN -->
+      <div class="lg:col-span-8 space-y-6">
+
+        <!-- ROW 1: KINETIC MODELING CHARTS (TFM & H2S TELEMETRY) -->
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          
+          <!-- Chart 1: TFM Methane Kinetics -->
+          <div class="glass-card rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <i data-lucide="trending-up" class="w-4 h-4 text-emerald-400"></i>
+                  Kinetika Produksi Biometana (Model TFM)
+                </h3>
+                <p class="text-[11px] text-slate-400">Transference Function Model (R² = 0.9850, RMSE = 0.0827 | Yan et al., 2025)</p>
+              </div>
+              <span class="text-[10px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-700/50 px-2 py-0.5 rounded">Zero Lag Phase</span>
+            </div>
+            <div class="h-60">
+              <canvas id="tfmChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 2: Real-Time H2S Adsorption Breakthrough -->
+          <div class="glass-card rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <i data-lucide="activity" class="w-4 h-4 text-cyan-400"></i>
+                  Telemetri Purifikasi H₂S & Kurva Breakthrough
+                </h3>
+                <p class="text-[11px] text-slate-400">Kemisorpsi Basa K/Ca (pH_PZC 10.9) & Fisika Mikropori 1,105 m²/g</p>
+              </div>
+              <span class="text-[10px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-700/50 px-2 py-0.5 rounded">Batas Aman &lt;50 ppm</span>
+            </div>
+            <div class="h-60">
+              <canvas id="h2sChart"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ROW 2: MODULAR LEAD-LAG H2S SCRUBBER SKID DIGITAL TWIN -->
+        <div class="glass-card rounded-2xl p-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3 mb-4">
+            <div>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
+                <i data-lucide="server" class="w-4 h-4 text-emerald-400"></i>
+                3. Digital Twin: Modular Lead-Lag H₂S Scrubber Skid (Operasi Kontinu 24/7)
+              </h3>
+              <p class="text-xs text-slate-400">Sistem kolom kembar paralel dengan pelet silinder 5 mm (Anti-Channeling, Pressure Drop &lt;15 mbar)</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="toggleLeadLag()" class="text-xs font-mono font-semibold bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 shadow-lg shadow-cyan-600/20">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Simulasi Switch Katup Lead-Lag
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+            
+            <!-- COLUMN A (LEAD) -->
+            <div id="col-a-card" class="p-4 rounded-xl bg-emerald-950/30 border-2 border-emerald-500/60 relative">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-bold font-mono text-white">KOLOM A (VESSEL-01)</span>
+                <span id="col-a-badge" class="text-[10px] font-mono font-bold bg-emerald-500 text-slate-950 px-2 py-0.5 rounded">LEAD • ACTIVE</span>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Media Adsorben:</span>
+                  <span class="font-mono text-white">Pelet BioTrap 5 mm</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Tingkat Kejenuhan S⁰/SO₄²⁻:</span>
+                  <span id="col-a-sat-text" class="font-mono font-bold text-amber-400">78.4% (Terpakai 52 Hari)</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                  <div id="col-a-bar" class="bg-gradient-to-r from-emerald-500 to-amber-500 h-full rounded-full transition-all duration-500" style="width: 78.4%"></div>
+                </div>
+                <div class="flex justify-between pt-1 text-[11px] font-mono text-slate-400">
+                  <span>ΔP: <strong>11.4 mbar</strong></span>
+                  <span>Suhu: <strong>38.2°C</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- CENTER PIPING & TELEMETRY CONTROLLER -->
+            <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-center space-y-2.5">
+              <div class="inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 bg-cyan-950/80 px-3 py-1 rounded-full border border-cyan-800">
+                <i data-lucide="gauge" class="w-3.5 h-3.5"></i> AUTO-VALVE CONTROLLER
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-xs pt-1">
+                <div class="p-2 rounded-lg bg-slate-950 border border-slate-800">
+                  <p class="text-[10px] text-slate-400">RAW BIOGAS IN</p>
+                  <p id="skid-in-ppm" class="font-mono font-bold text-rose-400 text-sm">2,500 ppm</p>
+                </div>
+                <div class="p-2 rounded-lg bg-slate-950 border border-slate-800">
+                  <p class="text-[10px] text-slate-400">CLEAN GAS OUT</p>
+                  <p id="skid-out-ppm" class="font-mono font-bold text-emerald-400 text-sm">18 ppm</p>
+                </div>
+              </div>
+              <p id="valve-status-msg" class="text-[11px] text-slate-400 font-mono">
+                Mode: <strong>Kolom A (Lead) → Kolom B (Polishing/Lag)</strong>. Sisa umur pakai Kolom A: <strong>16 Hari</strong> sebelum panen BioSulfur™.
+              </p>
+            </div>
+
+            <!-- COLUMN B (LAG) -->
+            <div id="col-b-card" class="p-4 rounded-xl bg-slate-900/70 border border-slate-700/80 relative">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-bold font-mono text-white">KOLOM B (VESSEL-02)</span>
+                <span id="col-b-badge" class="text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 px-2 py-0.5 rounded">LAG • STANDBY</span>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Media Adsorben:</span>
+                  <span class="font-mono text-white">Pelet BioTrap Fresh</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Tingkat Kejenuhan S⁰/SO₄²⁻:</span>
+                  <span id="col-b-sat-text" class="font-mono font-bold text-emerald-400">12.0% (Siap Backup)</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                  <div id="col-b-bar" class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 12%"></div>
+                </div>
+                <div class="flex justify-between pt-1 text-[11px] font-mono text-slate-400">
+                  <span>ΔP: <strong>8.2 mbar</strong></span>
+                  <span>Suhu: <strong>36.0°C</strong></span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ROW 3: RAZOR & BLADE SUPPLY CHAIN AUTOMATION & ESG FINANCIAL METRICS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Automated Razor & Blade Supply Chain -->
+          <div class="glass-card rounded-2xl p-5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+              <div class="flex items-center gap-2">
+                <i data-lucide="truck" class="w-4 h-4 text-amber-400"></i>
+                <h3 class="text-sm font-bold uppercase tracking-wider text-white">4. Otomasi Rantai Pasok (Razor & Blade)</h3>
+              </div>
+              <span class="text-[10px] font-mono bg-amber-500/10 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded">Co-Location Hub</span>
+            </div>
+            <div class="space-y-2.5 text-xs">
+              <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+                <i data-lucide="package-check" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                <div>
+                  <p class="font-semibold text-white">Repeat Order Otomatis Pelet BioTrap-TKKS™ ("Blade")</p>
+                  <p class="text-slate-400 mt-0.5">Jadwal pengiriman berikutnya dalam <strong>16 hari</strong> (3.6 Ton @ <strong>Rp12.000/kg</strong> — Hemat 60% OPEX dibanding karbon aktif batu bara Rp35.000/kg).</p>
+                </div>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+                <i data-lucide="sprout" class="w-5 h-5 text-cyan-400 shrink-0 mt-0.5"></i>
+                <div>
+                  <p class="font-semibold text-white">Jadwal Panen & Valorisasi Pupuk BioSulfur™</p>
+                  <p class="text-slate-400 mt-0.5">Media jenuh sulfur (S 4–8%, C &gt;75%, KTK &gt;56 meq/100g) lolos uji TCLP &amp; PAH &lt; LoD, siap didistribusikan ke KUD Petani Sawit seharga <strong>Rp2.500/kg</strong>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Financial & ESG Compliance Summary -->
+          <div class="glass-card rounded-2xl p-5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+              <div class="flex items-center gap-2">
+                <i data-lucide="badge-dollar-sign" class="w-4 h-4 text-emerald-400"></i>
+                <h3 class="text-sm font-bold uppercase tracking-wider text-white">5. Valuasi Ekonomi & Kepatuhan ISPO/RSPO</h3>
+              </div>
+              <span class="text-[10px] font-mono bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded">Verified MRV</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 text-xs">
+              <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                <p class="text-slate-400">CAPEX Modular Skid ("Razor")</p>
+                <p class="text-lg font-bold font-mono text-white mt-0.5">Rp185 Juta</p>
+                <p class="text-[11px] text-emerald-400">Margin 35% • TKDN ≥ 90%</p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                <p class="text-slate-400">Penghematan Biaya B3 & OPEX</p>
+                <p class="text-lg font-bold font-mono text-emerald-400 mt-0.5">Rp1.20 Miliar</p>
+                <p class="text-[11px] text-slate-400">Per PKS / Tahun (Zero Landfill)</p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                <p class="text-slate-400">Kelayakan Proyek (WACC 10%)</p>
+                <p class="text-lg font-bold font-mono text-cyan-400 mt-0.5">NPV Rp18.74 M</p>
+                <p class="text-[11px] text-slate-400">IRR 38.2% • Payback 2.4 Thn</p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                <p class="text-slate-400">Ekuivalensi Serapan Karbon</p>
+                <p class="text-lg font-bold font-mono text-amber-400 mt-0.5">6.8 Juta Pohon</p>
+                <p class="text-[11px] text-slate-400">SDG 7, 9, 12 &amp; 13 Compliant</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- JAVASCRIPT ENGINE: RSM-CCD, TFM KINETICS & LEAD-LAG SIMULATION -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    let isColumnALead = true;
+    let tfmChartInstance = null;
+    let h2sChartInstance = null;
+
+    // Mathematical Function: RSM-CCD 2FI + Quadratic Approximation (Yan et al., 2025)
+    function calculateRSM(biocharDose, fiRatio, codInlet) {
+      // Base yield at 0 g/L biochar is 0.205 L/g VS
+      // Optimum at Biochar = 2.0 g/L and FI = 0.266 gives 0.355 L/g VS (+73.3%)
+      const doseDiff = biocharDose - 2.0;
+      const fiDiff = fiRatio - 0.266;
+      const codFactor = 1 - Math.abs(codInlet - 98.77) * 0.0012;
+
+      let yieldVal = 0.355 - (0.0375 * doseDiff * doseDiff) - (1.85 * fiDiff * fiDiff) + (0.04 * doseDiff * fiDiff);
+      if (biocharDose === 0) yieldVal = 0.205;
+      yieldVal = Math.max(0.180, Math.min(0.362, yieldVal * codFactor));
+
+      const desirability = Math.max(0.42, Math.min(0.940, (yieldVal / 0.355) * 0.940));
+      return { yieldVal, desirability };
+    }
+
+    // Initialize Charts
+    function initCharts() {
+      const days = Array.from({ length: 16 }, (_, i) => `Hari ${i * 2}`);
+      
+      // 1. TFM Kinetic Curve Chart
+      const ctxTfm = document.getElementById('tfmChart').getContext('2d');
+      tfmChartInstance = new Chart(ctxTfm, {
+        type: 'line',
+        data: {
+          labels: days,
+          datasets: [
+            {
+              label: 'BioTrap-TKKS™ Catalyzed (DIET, λ = -0.336 d)',
+              data: [],
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.15)',
+              borderWidth: 2.5,
+              fill: true,
+              tension: 0.35,
+              pointRadius: 2.5
+            },
+            {
+              label: 'Kontrol Konvensional (Tanpa Biochar)',
+              data: days.map((_, i) => +(0.205 * (1 - Math.exp(-0.14 * Math.max(0, i * 2 - 2.5)))).toFixed(3)),
+              borderColor: '#64748b',
+              borderDash: [5, 5],
+              borderWidth: 2,
+              fill: false,
+              tension: 0.35,
+              pointRadius: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+          },
+          scales: {
+            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { 
+              title: { display: true, text: 'Cumulative CH₄ Yield (L/g VS)', color: '#94a3b8', font: { size: 10 } },
+              ticks: { color: '#94a3b8', font: { size: 10 } }, 
+              grid: { color: 'rgba(255,255,255,0.05)' },
+              suggestedMin: 0,
+              suggestedMax: 0.40
+            }
+          }
+        }
+      });
+
+      // 2. H2S Telemetry Chart
+      const hours = ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00 (Live)'];
+      const ctxH2s = document.getElementById('h2sChart').getContext('2d');
+      h2sChartInstance = new Chart(ctxH2s, {
+        type: 'line',
+        data: {
+          labels: hours,
+          datasets: [
+            {
+              label: 'H₂S Outlet Lead-Lag Skid (ppm)',
+              data: [14, 15, 16, 17, 17, 18, 18],
+              borderColor: '#06b6d4',
+              backgroundColor: 'rgba(6, 182, 212, 0.15)',
+              borderWidth: 2.5,
+              fill: true,
+              tension: 0.3
+            },
+            {
+              label: 'Batas Aman Gas Engine (50 ppm)',
+              data: [50, 50, 50, 50, 50, 50, 50],
+              borderColor: '#f43f5e',
+              borderDash: [4, 4],
+              borderWidth: 1.5,
+              pointRadius: 0,
+              fill: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+          },
+          scales: {
+            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { 
+              title: { display: true, text: 'Konsentrasi H₂S Outlet (ppm)', color: '#94a3b8', font: { size: 10 } },
+              ticks: { color: '#94a3b8', font: { size: 10 } }, 
+              grid: { color: 'rgba(255,255,255,0.05)' },
+              min: 0,
+              max: 65
+            }
+          }
+        }
+      });
+
+      updateSimulation();
+    }
+
+    // Update Simulation Based on Sliders
+    function updateSimulation() {
+      const tbs = parseFloat(document.getElementById('input-tbs').value);
+      const cod = parseFloat(document.getElementById('input-cod').value);
+      const biochar = parseFloat(document.getElementById('input-biochar').value);
+      const fi = parseFloat(document.getElementById('input-fi').value);
+      const h2sIn = parseFloat(document.getElementById('input-h2s').value);
+
+      // Update Label Texts
+      document.getElementById('val-tbs').innerText = `${tbs} Ton/jam`;
+      document.getElementById('val-cod').innerText = `${cod.toFixed(2)} g/L`;
+      document.getElementById('val-biochar').innerText = `${biochar.toFixed(2)} g/L`;
+      document.getElementById('val-fi').innerText = fi.toFixed(3);
+      document.getElementById('val-h2s-in').innerText = `${h2sIn.toLocaleString()} ppm`;
+
+      // Calculate RSM-CCD Outputs
+      const { yieldVal, desirability } = calculateRSM(biochar, fi, cod);
+      const boostPct = (((yieldVal - 0.205) / 0.205) * 100).toFixed(1);
+
+      document.getElementById('kpi-yield').innerText = yieldVal.toFixed(3);
+      document.getElementById('kpi-yield-boost').innerText = `${boostPct >= 0 ? '+' : ''}${boostPct}% vs Kontrol (0.205)`;
+      document.getElementById('val-desirability').innerText = desirability.toFixed(3);
+
+      // Calculate Mass & Energy Balance
+      const pomeDaily = Math.round(tbs * 15.55);
+      const pomeHourly = (pomeDaily / 24).toFixed(1);
+      const microDaily = Math.round(pomeDaily * biochar);
+      const tkksDaily = Math.round(tbs * 5.11);
+      const pelletDaily = (tbs * 0.0266).toFixed(2);
+      const fertDaily = (tbs * 0.0533).toFixed(2);
+
+      const biogasDaily = Math.round((pomeDaily / 700) * (yieldVal / 0.355) * 14200);
+      const powerMW = ((biogasDaily / 14200) * 1.20).toFixed(2);
+
+      document.getElementById('mass-pome').innerText = `${pomeDaily.toLocaleString()} m³/hari (${pomeHourly} m³/jam)`;
+      document.getElementById('mass-micro').innerText = `${microDaily.toLocaleString()} kg/hari (${biochar.toFixed(1)} g/L)`;
+      document.getElementById('mass-tkks').innerText = `${tkksDaily} Ton/hari (${(tkksDaily/24).toFixed(1)} T/jam)`;
+      document.getElementById('mass-pellet').innerText = `${pelletDaily} Ton/hari (${Math.round(pelletDaily*30)} T/bulan)`;
+      document.getElementById('mass-fertilizer').innerText = `${fertDaily} Ton/hari (Karung 50 kg)`;
+
+      document.getElementById('kpi-power').innerText = powerMW;
+      document.getElementById('kpi-biogas-vol').innerText = `${biogasDaily.toLocaleString()} Nm³/hari Biometana`;
+
+      // H2S Outlet Calculation
+      const h2sOut = Math.max(8, Math.round((h2sIn / 2500) * (isColumnALead ? 18 : 9)));
+      const h2sEff = (((h2sIn - h2sOut) / h2sIn) * 100).toFixed(2);
+      document.getElementById('kpi-h2s-out').innerText = h2sOut;
+      document.getElementById('kpi-h2s-eff').innerText = `Efisiensi Serap: ${h2sEff}%`;
+      document.getElementById('skid-in-ppm').innerText = `${h2sIn.toLocaleString()} ppm`;
+      document.getElementById('skid-out-ppm').innerText = `${h2sOut} ppm`;
+
+      // Advisor Message Logic
+      const advisorEl = document.getElementById('advisor-text');
+      if (Math.abs(biochar - 2.0) <= 0.3 && Math.abs(fi - 0.266) <= 0.03) {
+        advisorEl.innerHTML = `Kondisi <strong class="text-emerald-400">OPTIMAL (Desirability ${desirability.toFixed(3)})</strong>. Injeksi mikro-biochar <strong>${biochar.toFixed(2)} g/L</strong> memfasilitasi mekanisme DIET secara maksimal, meningkatkan biometana <strong>+${boostPct}%</strong> tanpa fase tunda.`;
+      } else if (biochar < 1.5) {
+        advisorEl.innerHTML = `<strong class="text-amber-400">PERINGATAN UNDER-DOSING:</strong> Dosis biochar <strong>${biochar.toFixed(2)} g/L</strong> belum mencukupi kapasitas koloni pori honeycomb. Tingkatkan menuju <strong>2.00 g/L</strong> untuk memulihkan laju DIET.`;
+      } else {
+        advisorEl.innerHTML = `<strong class="text-cyan-400">PERINGATAN OVER-DOSING / SUB-OPTIMAL:</strong> Dosis di atas titik jenuh (>2.5 g/L) atau deviasi rasio FI menurunkan efisiensi pengadukan reaktor. Klik <em>Set Optimum</em> untuk kalibrasi otomatis.`;
+      }
+
+      // Update TFM Kinetic Curve Data
+      if (tfmChartInstance) {
+        const kRate = biochar > 0 ? 0.26 : 0.14;
+        const newCurve = Array.from({ length: 16 }, (_, i) => {
+          const t = i * 2;
+          return +(yieldVal * (1 - Math.exp(-kRate * (t + 0.336)))).toFixed(3);
+        });
+        tfmChartInstance.data.datasets[0].data = newCurve;
+        tfmChartInstance.update();
+      }
+
+      // Update H2S Telemetry Chart Data
+      if (h2sChartInstance) {
+        const baseOut = h2sOut;
+        h2sChartInstance.data.datasets[0].data = [
+          Math.max(5, baseOut - 4),
+          Math.max(6, baseOut - 3),
+          Math.max(7, baseOut - 2),
+          Math.max(8, baseOut - 1),
+          baseOut,
+          baseOut,
+          baseOut
+        ];
+        h2sChartInstance.update();
+      }
+    }
+
+    // Reset to RSM-CCD Optimum
+    function resetOptimal() {
+      document.getElementById('input-tbs').value = 45;
+      document.getElementById('input-cod').value = 98.77;
+      document.getElementById('input-biochar').value = 2.0;
+      document.getElementById('input-fi').value = 0.266;
+      document.getElementById('input-h2s').value = 2500;
+      updateSimulation();
+    }
+
+    // Toggle Lead-Lag Column Valve
+    function toggleLeadLag() {
+      isColumnALead = !isColumnALead;
+      const colACard = document.getElementById('col-a-card');
+      const colBCard = document.getElementById('col-b-card');
+      const colABadge = document.getElementById('col-a-badge');
+      const colBBadge = document.getElementById('col-b-badge');
+      const valveMsg = document.getElementById('valve-status-msg');
+
+      if (isColumnALead) {
+        colACard.className = "p-4 rounded-xl bg-emerald-950/30 border-2 border-emerald-500/60 relative";
+        colBCard.className = "p-4 rounded-xl bg-slate-900/70 border border-slate-700/80 relative";
+        colABadge.className = "text-[10px] font-mono font-bold bg-emerald-500 text-slate-950 px-2 py-0.5 rounded";
+        colABadge.innerText = "LEAD • ACTIVE";
+        colBBadge.className = "text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 px-2 py-0.5 rounded";
+        colBBadge.innerText = "LAG • STANDBY";
+        valveMsg.innerHTML = `Mode: <strong>Kolom A (Lead) → Kolom B (Polishing/Lag)</strong>. Sisa umur pakai Kolom A: <strong>16 Hari</strong> sebelum panen BioSulfur™.`;
+      } else {
+        colBCard.className = "p-4 rounded-xl bg-emerald-950/30 border-2 border-emerald-500/60 relative";
+        colACard.className = "p-4 rounded-xl bg-amber-950/20 border border-amber-600/50 relative";
+        colBBadge.className = "text-[10px] font-mono font-bold bg-emerald-500 text-slate-950 px-2 py-0.5 rounded";
+        colBBadge.innerText = "LEAD • ACTIVE (FRESH)";
+        colABadge.className = "text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded";
+        colABadge.innerText = "HARVESTING BIOSULFUR™";
+        valveMsg.innerHTML = `Mode <strong class="text-emerald-400">VALVE SWITCHED:</strong> Aliran utama dialihkan ke <strong>Kolom B (Fresh Pelet)</strong>. Kolom A sedang dipanen menjadi pupuk <strong>BioSulfur™</strong> tanpa menghentikan genset 1.2 MW!`;
+      }
+      updateSimulation();
+    }
+
+    window.onload = initCharts;
+  </script>
+</body>
+</html>
